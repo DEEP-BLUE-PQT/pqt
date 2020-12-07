@@ -1,0 +1,6 @@
+package pratik.pqt
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
