@@ -5,4 +5,4 @@
 3) git checkout -b branchName
 4) git add .
 4) git commmit --> window 
-5) git push ()
+5) git push --set-upstream origin branchName
