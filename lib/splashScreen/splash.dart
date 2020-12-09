@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
             ),
             nextScreen: AdminSel(),
             splashTransition: SplashTransition.slideTransition,
-            pageTransitionType: PageTransitionType.fade,
+            pageTransitionType: PageTransitionType.bottomToTop,
             backgroundColor: Colors.white),
       ),
     );
