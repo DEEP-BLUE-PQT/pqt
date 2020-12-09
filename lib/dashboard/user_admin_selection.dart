@@ -12,14 +12,14 @@ class _AdminSelState extends State<AdminSel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo,
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               "Who Are You?",
-              style: TextStyle(fontSize: 30.0, color: Colors.white),
+              style: TextStyle(fontSize: 30.0),
             ),
             SizedBox(
               height: 50.0,
