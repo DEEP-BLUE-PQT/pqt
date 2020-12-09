@@ -1,72 +1,62 @@
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class Bnavigation extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      color: Color(0xFF3D00E0),
-      title: 'ff_navigation_bar Demo',
-      home: MyHomePage(title: 'Testing'),
-    );
-  }
+  _BnavigationState createState() => _BnavigationState();
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class _BnavigationState extends State<Bnavigation> {
   int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
+              child: Column(
+                children: <Widget>[
+                  Container(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text("username"),
+                ],
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
+              title: Text("All Post"),
+              trailing: Icon(Icons.launch),
+              onTap: () {},
             ),
             ListTile(
-              title: Text('Item 2'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
+              title: Text("New Story"),
+              trailing: Icon(Icons.add),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Settings"),
+              trailing: Icon(Icons.settings),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Feedback"),
+              trailing: Icon(Icons.feedback),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Logout"),
+              trailing: Icon(Icons.power_settings_new),
+              onTap: () {},
             ),
           ],
         ),
       ),
       appBar: AppBar(
         backgroundColor: Color(0xFF3D00E0),
-        title: Text(widget.title),
+        title: Text("widget.title"),
       ),
       body: Center(
         child: Column(

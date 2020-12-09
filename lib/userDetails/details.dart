@@ -23,6 +23,7 @@ class _DetailsState extends State<Details> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
+                padding: EdgeInsets.all(25.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
