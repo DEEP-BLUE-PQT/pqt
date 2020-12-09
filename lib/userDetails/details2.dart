@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_pqt_splash/BottomNavigation/navigation.dart';
 
 class Details2 extends StatefulWidget {
   @override
@@ -30,6 +31,7 @@ class _Details2State extends State<Details2> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
+                padding: EdgeInsets.all(25.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -104,7 +106,13 @@ class _Details2State extends State<Details2> {
                                   'SUBMIT',
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Bnavigation()),
+                                  );
+                                },
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30.0),
                                     side: BorderSide(

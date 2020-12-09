@@ -39,7 +39,7 @@ class _AdminDetailsState extends State<AdminDetails> {
                             return null;
                           },
                           decoration: InputDecoration(
-                              hintText: "Enter Name",
+                              hintText: "Enter Username",
                               icon: Icon(Icons.accessibility_new_outlined)),
                         ),
                       ),
