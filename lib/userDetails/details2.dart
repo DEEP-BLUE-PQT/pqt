@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/navigation.dart';
 
 class Details2 extends StatefulWidget {
+  static String route = 'details2';
+
   @override
   _Details2State createState() => _Details2State();
 }
@@ -107,10 +109,9 @@ class _Details2State extends State<Details2> {
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 onPressed: () {
-                                  Navigator.push(
+                                  Navigator.pushNamed(
                                     context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Bnavigation()),
+                                    Bnavigation.route,
                                   );
                                 },
                                 shape: RoundedRectangleBorder(
