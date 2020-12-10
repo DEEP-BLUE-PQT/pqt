@@ -39,9 +39,9 @@ class _AdminSelState extends State<AdminSel> {
                         style: TextStyle(color: Colors.white, fontSize: 20.0),
                       ),
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(builder: (context) => Details()),
+                          Details.route,
                         );
                       },
                       shape: CircleBorder(
@@ -69,10 +69,9 @@ class _AdminSelState extends State<AdminSel> {
                           style: TextStyle(color: Colors.white, fontSize: 20.0),
                         ),
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => AdminDetails()),
+                            AdminDetails.route,
                           );
                         },
                         shape: CircleBorder(

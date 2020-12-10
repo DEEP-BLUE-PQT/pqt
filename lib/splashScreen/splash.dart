@@ -7,22 +7,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: AnimatedSplashScreen(
-            duration: 3000,
-            splash: Image.asset(
-              'assets/images/test.jpg',
-              colorBlendMode: BlendMode.colorBurn,
-              height: 5000,
-              width: 5000,
-            ),
-            nextScreen: AdminSel(),
-            splashTransition: SplashTransition.slideTransition,
-            pageTransitionType: PageTransitionType.bottomToTop,
-            backgroundColor: Colors.white),
-      ),
+    return Scaffold(
+      body: AnimatedSplashScreen(
+          duration: 3000,
+          splash: Image.asset(
+            'assets/images/test.jpg',
+            colorBlendMode: BlendMode.colorBurn,
+            height: 5000,
+            width: 5000,
+          ),
+          nextScreen: AdminSel(),
+          splashTransition: SplashTransition.slideTransition,
+          backgroundColor: Colors.white),
     );
   }
 }

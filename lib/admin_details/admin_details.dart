@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AdminDetails extends StatefulWidget {
+  static String route = 'AdminDetails';
   @override
   _AdminDetailsState createState() => _AdminDetailsState();
 }

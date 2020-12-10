@@ -1,16 +1,17 @@
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
-import 'package:flutter_app_pqt_splash/BottomNavigation/post.dart';
 
-class Bnavigation extends StatefulWidget {
-  static String route = "Bnavigation";
+import 'navigation.dart';
+
+class Post extends StatefulWidget {
+  static String route = "Post";
   @override
-  _BnavigationState createState() => _BnavigationState();
+  _PostState createState() => _PostState();
 }
 
-class _BnavigationState extends State<Bnavigation> {
-  int selectedIndex = 0;
+class _PostState extends State<Post> {
+  int selectedIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +67,7 @@ class _BnavigationState extends State<Bnavigation> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'I am From make appointment',
+              'I am From post appointment',
             ),
           ],
         ),

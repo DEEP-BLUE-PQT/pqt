@@ -6,6 +6,7 @@ import 'package:flutter_app_pqt_splash/splashScreen/splash.dart';
 import 'details2.dart';
 
 class Details extends StatefulWidget {
+  static String route = 'details';
   @override
   _DetailsState createState() => _DetailsState();
 }
@@ -92,11 +93,7 @@ class _DetailsState extends State<Details> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Details2()),
-                              );
+                              Navigator.pushNamed(context, Details2.route);
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),

@@ -1,16 +1,19 @@
+import 'package:expansion_card/expansion_card.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/post.dart';
+import 'package:flutter_app_pqt_splash/expandable_card/expandable_card.dart';
 
-class Bnavigation extends StatefulWidget {
-  static String route = "Bnavigation";
+import 'navigation.dart';
+
+class Myappointment extends StatefulWidget {
+  static String route = "Myappointment";
   @override
-  _BnavigationState createState() => _BnavigationState();
+  _MyappointmentState createState() => _MyappointmentState();
 }
 
-class _BnavigationState extends State<Bnavigation> {
-  int selectedIndex = 0;
+class _MyappointmentState extends State<Myappointment> {
+  int selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +65,18 @@ class _BnavigationState extends State<Bnavigation> {
         title: Text("widget.title"),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'I am From make appointment',
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              //TODO take from esamyak
+              buildPadding(),
+              buildPadding(),
+              buildPadding(),
+              buildPadding(),
+              buildPadding(),
+              buildPadding(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: FFNavigationBar(
@@ -111,6 +119,55 @@ class _BnavigationState extends State<Bnavigation> {
             selectedBackgroundColor: Color(0xFF3D00E0),
           ),
         ],
+      ),
+    );
+  }
+
+  Padding buildPadding() {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        width: 400,
+        decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: ExpansionCard(
+          backgroundColor: Colors.grey,
+          borderRadius: 20,
+          title: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "testing",
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.black,
+                  ),
+                ),
+                Text(
+                  "testing",
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
+              ],
+            ),
+          ),
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 7),
+              child: Text("Content goes over here !",
+                  style: TextStyle(fontSize: 20, color: Colors.black)),
+            )
+          ],
+        ),
       ),
     );
   }
