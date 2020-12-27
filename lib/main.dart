@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
+import 'package:flutter_app_pqt_splash/admin_bottom_navigation/add_doctors.dart';
+import 'package:flutter_app_pqt_splash/admin_bottom_navigation/add_lab_test.dart';
+import 'package:flutter_app_pqt_splash/admin_bottom_navigation/add_post.dart';
 import 'package:flutter_app_pqt_splash/admin_details/admin_details.dart';
 import 'package:flutter_app_pqt_splash/dashboard/user_admin_selection.dart';
 import 'package:flutter_app_pqt_splash/splashScreen/splash.dart';
@@ -19,6 +22,9 @@ void main() {
       Bnavigation.route: (context) => Bnavigation(),
       Myappointment.route: (context) => Myappointment(),
       Post.route: (context) => Post(),
+      Addoctors.route: (context) => Addoctors(),
+      AddPost.route: (context) => AddPost(),
+      Addlabtest.route: (context) => Addlabtest()
     },
   ));
 }

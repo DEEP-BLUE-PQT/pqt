@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_pqt_splash/admin_bottom_navigation/add_doctors.dart';
 
 class AdminDetails extends StatefulWidget {
   static String route = 'AdminDetails';
@@ -73,7 +74,9 @@ class _AdminDetailsState extends State<AdminDetails> {
                               'LOGIN',
                               style: TextStyle(color: Colors.white),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, Addoctors.route);
+                            },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
                                 side: BorderSide(
