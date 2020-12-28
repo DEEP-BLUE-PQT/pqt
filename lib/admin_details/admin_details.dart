@@ -8,6 +8,10 @@ class AdminDetails extends StatefulWidget {
 }
 
 class _AdminDetailsState extends State<AdminDetails> {
+  var _adminusername;
+  var _adminpassword;
+  final usernameController = new TextEditingController();
+  final passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +38,7 @@ class _AdminDetailsState extends State<AdminDetails> {
                       child: Container(
                         width: 380,
                         child: TextFormField(
+                          controller: usernameController,
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Please enter some text';
@@ -50,6 +55,7 @@ class _AdminDetailsState extends State<AdminDetails> {
                       child: Container(
                         width: 380,
                         child: TextFormField(
+                          controller: passwordController,
                           obscureText: true,
                           validator: (value) {
                             if (value.isEmpty) {
@@ -74,8 +80,10 @@ class _AdminDetailsState extends State<AdminDetails> {
                               'LOGIN',
                               style: TextStyle(color: Colors.white),
                             ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, Addoctors.route);
+                            onPressed: () async {
+                              final String username = usernameController.text;
+                              final String password = passwordController.text;
+                              // Navigator.pushNamed(context, Addoctors.route);
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
