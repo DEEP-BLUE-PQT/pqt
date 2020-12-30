@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
 import 'package:flutter_app_pqt_splash/admin_bottom_navigation/add_doctors.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class AdminDetails extends StatefulWidget {
   static String route = 'AdminDetails';
@@ -8,6 +10,20 @@ class AdminDetails extends StatefulWidget {
 }
 
 class _AdminDetailsState extends State<AdminDetails> {
+  _onBasicAlertPressed(context) {
+    Alert(
+      style: AlertStyle(
+        isButtonVisible: false,
+        isCloseButton: true,
+        backgroundColor: Colors.white,
+      ),
+      context: context,
+      title: "Password Incorrect",
+      desc: "Try Again",
+    ).show();
+  }
+
+  APIservice admin = APIservice();
   var _adminusername;
   var _adminpassword;
   final usernameController = new TextEditingController();
@@ -84,7 +100,13 @@ class _AdminDetailsState extends State<AdminDetails> {
                               final String username = usernameController.text;
                               final String password = passwordController.text;
 
-                              
+                              String response_admin_login =
+                                  await admin.login(username, password);
+                              if (response_admin_login == "1") {
+                                Navigator.pushNamed(context, Addoctors.route);
+                              } else {
+                                _onBasicAlertPressed(context);
+                              }
                               // Navigator.pushNamed(context, Addoctors.route);
                             },
                             shape: RoundedRectangleBorder(
