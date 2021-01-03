@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/navigation.dart';
+import 'package:flutter_app_pqt_splash/constants.dart';
 
 class Details2 extends StatefulWidget {
   static String route = 'details2';
@@ -45,6 +46,7 @@ class _Details2State extends State<Details2> {
                         onChanged: (newValue) {
                           setState(() {
                             _selectedAge = newValue;
+                            userAgeText = newValue;
                           });
                         },
                         items: _age.map((location) {
@@ -62,6 +64,7 @@ class _Details2State extends State<Details2> {
                         onChanged: (newValue) {
                           setState(() {
                             _selectedDisability = newValue;
+                            userDisabilityText = newValue;
                           });
                         },
                         items: _disability.map((location) {

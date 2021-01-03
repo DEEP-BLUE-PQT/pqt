@@ -1,8 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_pqt_splash/splashScreen/splash.dart';
-
+import 'package:flutter_app_pqt_splash/constants.dart';
 import 'details2.dart';
 
 class Details extends StatefulWidget {
@@ -12,6 +11,10 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+  final userName = new TextEditingController();
+  final userContact = new TextEditingController();
+  final userEmail = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +42,7 @@ class _DetailsState extends State<Details> {
                       child: Container(
                         width: 380,
                         child: TextFormField(
+                          controller: userName,
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Please enter some text';
@@ -55,6 +59,7 @@ class _DetailsState extends State<Details> {
                       child: Container(
                         width: 380,
                         child: TextFormField(
+                          controller: userContact,
                           keyboardType: TextInputType.number,
                           validator: (value) {
                             if (value.isEmpty) {
@@ -72,6 +77,7 @@ class _DetailsState extends State<Details> {
                       child: Container(
                         width: 380,
                         child: TextFormField(
+                          controller: userEmail,
                           validator: (value) => EmailValidator.validate(value)
                               ? null
                               : "Please enter a valid email",
@@ -93,6 +99,9 @@ class _DetailsState extends State<Details> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
+                              userNameText = userName.text;
+                              userContactText = userContact.text;
+                              userEmailText = userEmail.text;
                               Navigator.pushNamed(context, Details2.route);
                             },
                             shape: RoundedRectangleBorder(
