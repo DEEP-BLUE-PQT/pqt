@@ -2,7 +2,9 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/constants.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'details2.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Details extends StatefulWidget {
   static String route = 'details';
@@ -11,9 +13,45 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+  _onBasicAlertPressed(context, String title) {
+    Alert(
+      style: AlertStyle(
+        isButtonVisible: false,
+        isCloseButton: true,
+        backgroundColor: Colors.white,
+      ),
+      context: context,
+      title: title,
+      desc: "Try Again",
+    ).show();
+  }
+
+  bool validateMobile(String value) {
+    // Indian Mobile number are of 10 digit only
+    if (value.length != 10)
+      return false;
+    else
+      return true;
+  }
+
   final userName = new TextEditingController();
   final userContact = new TextEditingController();
   final userEmail = new TextEditingController();
+
+  @override
+  void initState() {
+    getData();
+  }
+
+  getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      userName.text = prefs.getString("userName");
+      userContact.text = prefs.getString("userContact");
+      userEmail.text = prefs.getString("userEmail");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +81,6 @@ class _DetailsState extends State<Details> {
                         width: 380,
                         child: TextFormField(
                           controller: userName,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter some text';
-                            }
-                            return null;
-                          },
                           decoration: InputDecoration(
                               hintText: "Enter Name",
                               icon: Icon(Icons.accessibility_new_outlined)),
@@ -61,12 +93,6 @@ class _DetailsState extends State<Details> {
                         child: TextFormField(
                           controller: userContact,
                           keyboardType: TextInputType.number,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter some text';
-                            }
-                            return null;
-                          },
                           decoration: InputDecoration(
                               hintText: "Enter Mobile Number",
                               icon: Icon(Icons.mobile_screen_share)),
@@ -78,9 +104,6 @@ class _DetailsState extends State<Details> {
                         width: 380,
                         child: TextFormField(
                           controller: userEmail,
-                          validator: (value) => EmailValidator.validate(value)
-                              ? null
-                              : "Please enter a valid email",
                           decoration: InputDecoration(
                               hintText: "Enter Email Address",
                               icon: Icon(Icons.email)),
@@ -98,11 +121,36 @@ class _DetailsState extends State<Details> {
                               'NEXT',
                               style: TextStyle(color: Colors.white),
                             ),
-                            onPressed: () {
-                              userNameText = userName.text;
-                              userContactText = userContact.text;
-                              userEmailText = userEmail.text;
-                              Navigator.pushNamed(context, Details2.route);
+                            onPressed: () async {
+                              if (userName.text == '') {
+                                _onBasicAlertPressed(
+                                    context, 'Please Enter Name');
+                              }
+                              bool emailValid = RegExp(
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(userEmail.text);
+                              if (emailValid == false) {
+                                _onBasicAlertPressed(
+                                    context, 'Please Enter a valid Email');
+                              }
+                              bool mobileValid =
+                                  validateMobile(userContact.text);
+                              if (mobileValid == false) {
+                                print(mobileValid);
+                                _onBasicAlertPressed(context,
+                                    'Please Enter a valid Mobile Number');
+                              } else {
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.setString("userName", userName.text);
+                                prefs.setString(
+                                    "userContact", userContact.text);
+                                prefs.setString("userEmail", userEmail.text);
+                                userNameText = userName.text;
+                                userContactText = userContact.text;
+                                userEmailText = userEmail.text;
+                                Navigator.pushNamed(context, Details2.route);
+                              }
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
