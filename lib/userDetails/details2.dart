@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/navigation.dart';
 import 'package:flutter_app_pqt_splash/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Details2 extends StatefulWidget {
   static String route = 'details2';
@@ -22,6 +23,20 @@ class _Details2State extends State<Details2> {
   List<String> _disability = ['No disability', 'disability']; // Option 2
   String _selectedAge;
   String _selectedDisability; // Option 2
+  @override
+  void initState() {
+    getData();
+  }
+
+  getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      _selectedAge = prefs.getString("_selectedAge");
+      _selectedDisability = prefs.getString("_selectedDisability");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +126,16 @@ class _Details2State extends State<Details2> {
                                   'SUBMIT',
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+
+                                  prefs.setString("_selectedAge", _selectedAge);
+                                  prefs.setString("_selectedDisability",
+                                      _selectedDisability);
+
+                                  userAgeText = _selectedAge;
+                                  userDisabilityText = _selectedDisability;
                                   Navigator.pushNamed(
                                     context,
                                     Bnavigation.route,
