@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/post.dart';
 
+import '../constants.dart';
+
 class Bnavigation extends StatefulWidget {
   static String route = "Bnavigation";
   @override
@@ -10,6 +12,7 @@ class Bnavigation extends StatefulWidget {
 }
 
 class _BnavigationState extends State<Bnavigation> {
+  final editingController = new TextEditingController();
   int selectedIndex = 0;
 
   @override
@@ -59,14 +62,84 @@ class _BnavigationState extends State<Bnavigation> {
       ),
       appBar: AppBar(
         backgroundColor: Color(0xFF3D00E0),
-        title: Text("widget.title"),
+        title: Text("Make Appointment"),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'I am From make appointment',
+          children: [
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: TextField(
+                controller: editingController,
+                decoration: InputDecoration(
+                    hintText: "Search",
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: doctorList == null ? 0 : doctorList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        docId = doctorList[index]['docid'].toString();
+                        //TODO AAKANSHA KA PAGE
+                        //  Navigator.push(
+                        //    context,
+                        //    MaterialPageRoute(builder: (context) => Main2()),
+                        //  );
+                      });
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.person,
+                          color: Colors.grey,
+                          size: 40.0,
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Center(
+                          child: Container(
+                            height: 80.0,
+                            child: Center(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    doctorList[index]["docname"]
+                                        .toString()
+                                        .toUpperCase(),
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                      fontSize: 19.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Text(
+                                    doctorList[index]["depname"]
+                                        .toString()
+                                        .toUpperCase(),
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                      fontSize: 12.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),

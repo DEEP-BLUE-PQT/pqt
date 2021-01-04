@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
 import 'package:flutter_app_pqt_splash/admin_details/admin_details.dart';
 import 'package:flutter_app_pqt_splash/userDetails/details.dart';
 
@@ -9,6 +10,16 @@ class AdminSel extends StatefulWidget {
 }
 
 class _AdminSelState extends State<AdminSel> {
+  APIservice apIservice = APIservice();
+  @override
+  void initState() {
+    getDocList();
+  }
+
+  getDocList() async {
+    await apIservice.getDoctorList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

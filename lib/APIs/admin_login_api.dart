@@ -26,4 +26,18 @@ class APIservice {
       return null;
     }
   }
+
+  Future<String> getDoctorList() async {
+    var response = await http.get(
+      ngrok + 'api/doctor/',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      var mapResponse = json.decode(response.body);
+      doctorList = mapResponse["data"];
+    }
+  }
 }
