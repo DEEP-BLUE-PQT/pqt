@@ -10,6 +10,7 @@ import 'package:flutter_app_pqt_splash/userDetails/details.dart';
 import 'package:flutter_app_pqt_splash/userDetails/details2.dart';
 import 'BottomNavigation/navigation.dart';
 import 'BottomNavigation/post.dart';
+import 'BottomNavigation/makeappointment.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -24,7 +25,8 @@ void main() {
       Post.route: (context) => Post(),
       Addoctors.route: (context) => Addoctors(),
       AddPost.route: (context) => AddPost(),
-      Addlabtest.route: (context) => Addlabtest()
+      Addlabtest.route: (context) => Addlabtest(),
+      MakeAppointment.route: (context) => MakeAppointment(),
     },
   ));
 }
