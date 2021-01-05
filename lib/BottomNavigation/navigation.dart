@@ -1,5 +1,6 @@
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_pqt_splash/BottomNavigation/makeappointment.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/post.dart';
 
@@ -86,6 +87,7 @@ class _BnavigationState extends State<Bnavigation> {
                     onTap: () {
                       setState(() {
                         docId = doctorList[index]['docid'].toString();
+                        Navigator.pushNamed(context, MakeAppointment.route);
                         //TODO AAKANSHA KA PAGE
                         //  Navigator.push(
                         //    context,
