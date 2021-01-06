@@ -31,7 +31,8 @@ class _MakeAppointmentState extends State<MakeAppointment> {
 
     return Scaffold(
       backgroundColor: Color(0xFF3D00E0),
-      body: Column(
+      body: SingleChildScrollView(
+      child:Column(
         children: [
           Container(
             color: Color(0xFF3D00E0),
@@ -223,7 +224,9 @@ class _MakeAppointmentState extends State<MakeAppointment> {
 
         ],
       ),
+      )
     );
+    resizeToAvoidBottomInset: false;
   }
 }
 
