@@ -1,29 +1,18 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
-import 'package:flutter_app_pqt_splash/BottomNavigation/navigation.dart';
 import 'package:flutter_app_pqt_splash/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'details2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ndialog/ndialog.dart';
 
-class Details extends StatefulWidget {
-  static String route = 'details';
+class MakeAppt extends StatefulWidget {
+  static String route = 'makeapp2';
   @override
-  _DetailsState createState() => _DetailsState();
+  _MakeApptState createState() => _MakeApptState();
 }
 
-class _DetailsState extends State<Details> {
-  int _gendervalue = 1;
-  List genders = ['Male', 'Female', 'Others'];
-
-  APIservice apIservice = APIservice();
-
-  getDocList() async {
-    await apIservice.getDoctorList();
-  }
-
+class _MakeApptState extends State<MakeAppt> {
   _onBasicAlertPressed(context, String title) {
     Alert(
       style: AlertStyle(
@@ -48,12 +37,10 @@ class _DetailsState extends State<Details> {
   final userName = new TextEditingController();
   final userContact = new TextEditingController();
   final userEmail = new TextEditingController();
-  final userAge = new TextEditingController();
 
   @override
   void initState() {
     getData();
-    getDocList();
   }
 
   getData() async {
@@ -63,16 +50,7 @@ class _DetailsState extends State<Details> {
       userName.text = prefs.getString("userName");
       userContact.text = prefs.getString("userContact");
       userEmail.text = prefs.getString("userEmail");
-      userAge.text = prefs.getString("userAge");
     });
-  }
-
-  int getGender() {
-    if (userGender == '') {
-      return _gendervalue;
-    } else {
-      return genders.indexOf(userGender);
-    }
   }
 
   @override
@@ -125,58 +103,12 @@ class _DetailsState extends State<Details> {
                       child: Container(
                         width: 380,
                         child: TextFormField(
-                          controller: userAge,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                              hintText: "Enter Age",
-                              icon: Icon(Icons.add_chart)),
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Container(
-                        width: 380,
-                        child: TextFormField(
                           controller: userEmail,
                           decoration: InputDecoration(
                               hintText: "Enter Email Address",
                               icon: Icon(Icons.email)),
                         ),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.add_to_queue_rounded),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        DropdownButton(
-                            value: getGender(),
-                            hint: Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  "GENDER",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFF3D00E0)),
-                                )),
-                            items: [
-                              DropdownMenuItem(
-                                child: Text("MALE"),
-                                value: 0,
-                              ),
-                              DropdownMenuItem(
-                                child: Text("FEMALE"),
-                                value: 1,
-                              ),
-                              DropdownMenuItem(child: Text("OTHERS"), value: 2),
-                            ],
-                            onChanged: (value) {
-                              setState(() {
-                                _gendervalue = value;
-                              });
-                            }),
-                      ],
                     ),
                     Center(
                       child: Container(
@@ -186,16 +118,13 @@ class _DetailsState extends State<Details> {
                           child: RaisedButton(
                             color: Color(0xFF3D00E0),
                             child: Text(
-                              'Submit',
+                              'NEXT',
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () async {
                               if (userName.text == '') {
                                 _onBasicAlertPressed(
                                     context, 'Please Enter Name');
-                              }
-                              if (userAge.text == '') {
-                                _onBasicAlertPressed(context, 'Please Age');
                               }
                               bool emailValid = RegExp(
                                       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -217,15 +146,10 @@ class _DetailsState extends State<Details> {
                                 prefs.setString(
                                     "userContact", userContact.text);
                                 prefs.setString("userEmail", userEmail.text);
-                                prefs.setString("userAge", userAge.text);
-                                prefs.setString(
-                                    "userGender", genders[_gendervalue]);
                                 userNameText = userName.text;
                                 userContactText = userContact.text;
                                 userEmailText = userEmail.text;
-                                userAgeText = userAge.text;
-                                userGender = genders[_gendervalue];
-                                Navigator.pushNamed(context, Bnavigation.route);
+                                // Navigator.pushNamed(context, Details2.route);
                               }
                             },
                             shape: RoundedRectangleBorder(
