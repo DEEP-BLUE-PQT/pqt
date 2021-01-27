@@ -5,6 +5,7 @@ import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/post.dart';
 
 import '../constants.dart';
+import 'makeappointment2follower.dart';
 
 class Bnavigation extends StatefulWidget {
   static String route = "Bnavigation";
@@ -87,8 +88,10 @@ class _BnavigationState extends State<Bnavigation> {
                     onTap: () {
                       setState(() {
                         docId = doctorList[index]['docid'].toString();
+                        docName = doctorList[index]['docname'];
+                        depName = doctorList[index]['depname'];
                         Navigator.pushNamed(context, MakeAppointment.route);
-                        //TODO AAKANSHA KA PAGE
+                        //TODO SLOT KESE KRNA H
                         //  Navigator.push(
                         //    context,
                         //    MaterialPageRoute(builder: (context) => Main2()),
