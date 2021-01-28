@@ -1,8 +1,8 @@
-String ngrok = "https://8e5efa7c8974.ngrok.io/";
+String ngrok = "https://e8f8bf7a3b19.ngrok.io/";
 String userNameText;
 String userContactText;
 String userEmailText;
-String userGender;
+String userGenderText;
 String userAgeText;
 String userDisabilityText;
 List doctorList;

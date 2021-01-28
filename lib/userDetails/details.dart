@@ -49,6 +49,7 @@ class _DetailsState extends State<Details> {
   final userContact = new TextEditingController();
   final userEmail = new TextEditingController();
   final userAge = new TextEditingController();
+  final userGender = new TextEditingController();
 
   @override
   void initState() {
@@ -64,15 +65,8 @@ class _DetailsState extends State<Details> {
       userContact.text = prefs.getString("userContact");
       userEmail.text = prefs.getString("userEmail");
       userAge.text = prefs.getString("userAge");
+      userGender.text = prefs.getString('userGender');
     });
-  }
-
-  int getGender() {
-    if (userGender == '') {
-      return _gendervalue;
-    } else {
-      return genders.indexOf(userGender);
-    }
   }
 
   @override
@@ -144,39 +138,17 @@ class _DetailsState extends State<Details> {
                         ),
                       ),
                     ),
-                    Row(
-                      children: [
-                        Icon(Icons.add_to_queue_rounded),
-                        SizedBox(
-                          width: 20.0,
+                    Center(
+                      child: Container(
+                        width: 380,
+                        child: TextFormField(
+                          controller: userGender,
+                          decoration: InputDecoration(
+                              hintText:
+                                  "Enter M for Male , F for Female , O for Others",
+                              icon: Icon(Icons.add)),
                         ),
-                        DropdownButton(
-                            value: getGender(),
-                            hint: Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  "GENDER",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFF3D00E0)),
-                                )),
-                            items: [
-                              DropdownMenuItem(
-                                child: Text("MALE"),
-                                value: 0,
-                              ),
-                              DropdownMenuItem(
-                                child: Text("FEMALE"),
-                                value: 1,
-                              ),
-                              DropdownMenuItem(child: Text("OTHERS"), value: 2),
-                            ],
-                            onChanged: (value) {
-                              setState(() {
-                                _gendervalue = value;
-                              });
-                            }),
-                      ],
+                      ),
                     ),
                     Center(
                       child: Container(
@@ -218,13 +190,14 @@ class _DetailsState extends State<Details> {
                                     "userContact", userContact.text);
                                 prefs.setString("userEmail", userEmail.text);
                                 prefs.setString("userAge", userAge.text);
-                                prefs.setString(
-                                    "userGender", genders[_gendervalue]);
+                                prefs.setString("userGender",
+                                    userGender.text.toLowerCase());
+
                                 userNameText = userName.text;
                                 userContactText = userContact.text;
                                 userEmailText = userEmail.text;
                                 userAgeText = userAge.text;
-                                userGender = genders[_gendervalue];
+                                userGenderText = userGender.text;
                                 Navigator.pushNamed(context, Bnavigation.route);
                               }
                             },
