@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
+import 'dialog.dart';
 
 class MakeAppointment extends StatefulWidget {
   static String route = 'Makeappointment';
@@ -22,6 +23,7 @@ class _MakeAppointmentState extends State<MakeAppointment> {
   final userContact = new TextEditingController();
   final userEmail = new TextEditingController();
   final userAge = new TextEditingController();
+  final userGender = new TextEditingController();
 
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -31,6 +33,7 @@ class _MakeAppointmentState extends State<MakeAppointment> {
       userContact.text = prefs.getString("userContact");
       userEmail.text = prefs.getString("userEmail");
       userAge.text = prefs.getString("userAge");
+      userGender.text = prefs.getString("userGender");
     });
   }
 
@@ -144,12 +147,15 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                             Divider(color: Color(0xFF3D00E0)),
                             ListTile(
                               dense: true,
-                              leading: Text('GENDER',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFF3D00E0))),
+                              leading: Text(
+                                'GENDER',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFF3D00E0),
+                                ),
+                              ),
                               trailing: Text(
-                                userGender,
+                                userGender.text,
                                 style: TextStyle(fontSize: 15),
                               ),
                             ),
@@ -158,10 +164,13 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                             ),
                             ListTile(
                               dense: true,
-                              leading: Text('PHONE NO.',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFF3D00E0))),
+                              leading: Text(
+                                'PHONE NO.',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFF3D00E0),
+                                ),
+                              ),
                               trailing: Text(
                                 userContact.text,
                                 style: TextStyle(fontSize: 15),
@@ -179,19 +188,24 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                             minWidth: 100.0,
                             height: 50.0,
                             child: RaisedButton(
-                                color: Color(0xFF3D00E0),
-                                child: Text(
-                                  'EDIT DETAILS',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                onPressed: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (_) {
-                                        return MyDialog();
-                                      });
-                                } //on pressed
-                                ),
+                              color: Color(0xFF3D00E0),
+                              child: Text(
+                                'EDIT DETAILS',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () async {
+                                final result = await showDialog<bool>(
+                                  context: context,
+                                  builder: (_) {
+                                    return MyDialog();
+                                  },
+                                );
+                                if (result) {
+                                  // refresh screen}
+                                  setState(() {});
+                                }
+                              },
+                            ), //on pressed
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
                                 side: BorderSide(
@@ -241,155 +255,5 @@ class _MakeAppointmentState extends State<MakeAppointment> {
         ),
       ),
     );
-  }
-}
-
-class MyDialog extends StatefulWidget {
-  @override
-  _MyDialogState createState() => new _MyDialogState();
-}
-
-class _MyDialogState extends State<MyDialog> {
-  @override
-  void initState() {
-    getData();
-  }
-
-  List genders = ['Male', 'Female', 'Others'];
-  final userName = new TextEditingController();
-  final userContact = new TextEditingController();
-  final userEmail = new TextEditingController();
-  final userAge = new TextEditingController();
-
-  getData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    setState(() {
-      userName.text = prefs.getString("userName");
-      userContact.text = prefs.getString("userContact");
-      userEmail.text = prefs.getString("userEmail");
-      userAge.text = prefs.getString("userAge");
-    });
-  }
-
-  int _gendervalue = null;
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-        title: Center(
-          child: Text(
-            'DETAILS',
-            style: TextStyle(
-                fontWeight: FontWeight.w500, color: Color(0xFF3D00E0)),
-          ),
-        ),
-        content: setupAlertDialoadContainer());
-  }
-
-  Widget setupAlertDialoadContainer() {
-    return Container(
-        height: 300.0, // Change as per your requirement
-        width: 300.0, // Change as per your requirement
-        child: ListView(children: [
-          TextFormField(
-            controller: userName,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-            decoration: InputDecoration(
-                labelText: 'NAME',
-                labelStyle: TextStyle(
-                    fontWeight: FontWeight.w500, color: Color(0xFF3D00E0))),
-          ),
-          TextFormField(
-            controller: userAge,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-                hintText: "AGE",
-                hintStyle: TextStyle(
-                    fontWeight: FontWeight.w500, color: Color(0xFF3D00E0))),
-          ),
-          DropdownButton(
-              value: genders.indexOf(userGender),
-              hint: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    "GENDER",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500, color: Color(0xFF3D00E0)),
-                  )),
-              items: [
-                DropdownMenuItem(
-                  child: Text("MALE"),
-                  value: 1,
-                ),
-                DropdownMenuItem(
-                  child: Text("FEMALE"),
-                  value: 2,
-                ),
-                DropdownMenuItem(child: Text("OTHERS"), value: 3),
-              ],
-              onChanged: (value) {
-                setState(() {
-                  _gendervalue = value;
-                });
-              }),
-          TextFormField(
-            controller: userContact,
-            keyboardType: TextInputType.number,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-            decoration: InputDecoration(
-                labelText: 'MOBILE NO.',
-                labelStyle: TextStyle(
-                    fontWeight: FontWeight.w500, color: Color(0xFF3D00E0))),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ButtonTheme(
-                minWidth: 100.0,
-                height: 50.0,
-                child: RaisedButton(
-                  color: Color(0xFF3D00E0),
-                  child: Text(
-                    'SAVE',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () async {
-                    SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    prefs.setString("userName", userName.text);
-                    prefs.setString("userContact", userContact.text);
-                    prefs.setString("userEmail", userEmail.text);
-                    prefs.setString("userAge", userAge.text);
-                    prefs.setString("userGender", genders[_gendervalue]);
-                    userNameText = userName.text;
-                    userContactText = userContact.text;
-                    userEmailText = userEmail.text;
-                    userAgeText = userAge.text;
-                    userGender = genders[_gendervalue];
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      side: BorderSide(
-                        color: Color(0xFF3D00E0),
-                        width: 5.0,
-                      )),
-                ),
-              ),
-            ],
-          ),
-        ]));
   }
 }
