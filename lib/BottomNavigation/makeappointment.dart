@@ -201,7 +201,6 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                                   },
                                 );
                                 if (result) {
-                                  // refresh screen}
                                   setState(() {});
                                 }
                               },
