@@ -75,20 +75,6 @@ class _MyDialogState extends State<MyDialog> {
                     fontWeight: FontWeight.w500, color: Color(0xFF3D00E0))),
           ),
           TextFormField(
-            controller: userContact,
-            keyboardType: TextInputType.number,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-            decoration: InputDecoration(
-                labelText: 'MOBILE NO.',
-                labelStyle: TextStyle(
-                    fontWeight: FontWeight.w500, color: Color(0xFF3D00E0))),
-          ),
-          TextFormField(
             controller: userGender,
             decoration: InputDecoration(
                 labelText: 'Enter M for Male , F for Female , O for Others',
@@ -124,7 +110,7 @@ class _MyDialogState extends State<MyDialog> {
                     userAgeText = userAge.text;
                     userGenderText = userGender.text;
 
-                    Navigator.of(context).pop(true);
+                    Navigator.pushNamed(context, MakeAppointment.route);
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
