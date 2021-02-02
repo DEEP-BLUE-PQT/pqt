@@ -24,6 +24,10 @@ class _DetailsState extends State<Details> {
     await apIservice.getDoctorList();
   }
 
+  getSlotsList() async {
+    await apIservice.getSlotsList();
+  }
+
   _onBasicAlertPressed(context, String title) {
     Alert(
       style: AlertStyle(
@@ -55,6 +59,7 @@ class _DetailsState extends State<Details> {
   void initState() {
     getData();
     getDocList();
+    getSlotsList();
   }
 
   getData() async {

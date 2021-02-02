@@ -40,4 +40,18 @@ class APIservice {
       doctorList = mapResponse["data"];
     }
   }
+
+  Future<String> getSlotsList() async {
+    var response = await http.get(
+      ngrok + 'api/doctor/slots',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      var mapResponse = json.decode(response.body);
+      newSlotMap = mapResponse["data"];
+    }
+  }
 }
