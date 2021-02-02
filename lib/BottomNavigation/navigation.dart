@@ -90,6 +90,7 @@ class _BnavigationState extends State<Bnavigation> {
                         docId = doctorList[index]['docid'].toString();
                         docName = doctorList[index]['docname'];
                         depName = doctorList[index]['depname'];
+                        slots = newSlotMap[docName];
                         Navigator.pushNamed(context, MakeAppointment.route);
                         //TODO SLOT KESE KRNA H
                         //  Navigator.push(

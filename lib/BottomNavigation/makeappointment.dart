@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'dart:convert';
 import '../constants.dart';
 import 'dialog.dart';
 
@@ -9,8 +9,13 @@ class MakeAppointment extends StatefulWidget {
   @override
   _MakeAppointmentState createState() => _MakeAppointmentState();
 }
+//REGION HI SLOT H
 
 class _MakeAppointmentState extends State<MakeAppointment> {
+  String data = jsonEncode(slots);
+  List<Region> _region = [];
+  String selectedRegion;
+
   int _value = null;
   int _gendervalue = null;
 
@@ -39,6 +44,10 @@ class _MakeAppointmentState extends State<MakeAppointment> {
 
   @override
   Widget build(BuildContext context) {
+    final json = JsonDecoder().convert(data);
+    _region = (json).map<Region>((item) => Region.fromJson(item)).toList();
+    selectedRegion = _region[0].time;
+
     return Scaffold(
       backgroundColor: Color(0xFF3D00E0),
       body: SingleChildScrollView(
@@ -80,36 +89,37 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                       child: Container(
                     child: ListTile(
                       dense: true,
-                      leading: Text('TIME',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF3D00E0))),
-                      trailing: DropdownButton(
-                          value: _value,
-                          hint: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              "Select Slot",
-                              style: TextStyle(color: Colors.grey),
-                            ),
+                      leading: Text(
+                        'TIME',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF3D00E0),
+                        ),
+                      ),
+                      trailing: DropdownButton<String>(
+                        value: selectedRegion,
+                        isDense: true,
+                        hint: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "Select Slot",
+                            style: TextStyle(color: Colors.grey),
                           ),
-                          items: [
-                            DropdownMenuItem(
-                              child: Text("First Item"),
-                              value: 1,
-                            ),
-                            DropdownMenuItem(
-                              child: Text("Second Item"),
-                              value: 2,
-                            ),
-                            DropdownMenuItem(
-                                child: Text("Third Item"), value: 3),
-                          ],
-                          onChanged: (value) {
-                            setState(() {
-                              _value = value;
-                            });
-                          }),
+                        ),
+                        items: _region.map((Region map) {
+                          return new DropdownMenuItem<String>(
+                            value: map.time,
+                            child: new Text('${map.time}',
+                                style: new TextStyle(color: Colors.black)),
+                          );
+                        }).toList(),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            selectedRegion = newValue;
+                          });
+                          print(selectedRegion);
+                        },
+                      ),
                     ),
                   )),
                   Center(
@@ -254,5 +264,15 @@ class _MakeAppointmentState extends State<MakeAppointment> {
         ),
       ),
     );
+  }
+}
+
+class Region {
+  final int slotid;
+  final String time;
+
+  Region({this.slotid, this.time});
+  factory Region.fromJson(Map<String, dynamic> json) {
+    return new Region(slotid: json['slotid'], time: json['time']);
   }
 }

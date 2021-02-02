@@ -1,4 +1,4 @@
-String ngrok = "https://db43ccfc7ea8.ngrok.io/";
+String ngrok = "https://af52dfeba474.ngrok.io/";
 String userNameText;
 String userContactText;
 String userEmailText;
@@ -9,3 +9,5 @@ List doctorList;
 String docId;
 String docName;
 String depName;
+Map newSlotMap;
+List slots;
