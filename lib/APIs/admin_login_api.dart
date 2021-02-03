@@ -1,11 +1,20 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/secure_storage/storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
 
 class APIservice {
+  getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    age = prefs.getString("userAge");
+    gender = prefs.getString('userGender').toUpperCase();
+  }
+
   SecureStorage secureStorage = SecureStorage();
+
   Future<String> login(String username, String password) async {
     Map jsonMap = {"username": username, "password": password};
 
@@ -52,6 +61,30 @@ class APIservice {
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
       newSlotMap = mapResponse["data"];
+    }
+  }
+
+  Future<String> getServiceTime() async {
+    await getData();
+
+    Map jsonMap = {
+      "age": int.parse(age),
+      "doctor": depName,
+      "disability": "No disability",
+      "gender": gender
+    };
+
+    var response = await http.post(
+      ml,
+      body: json.encode(jsonMap),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      var mapResponse = json.decode(response.body);
+      // newSlotMap = mapResponse["data"];
     }
   }
 }
