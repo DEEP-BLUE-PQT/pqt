@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../constants.dart';
@@ -46,7 +47,7 @@ class _MakeAppointmentState extends State<MakeAppointment> {
   Widget build(BuildContext context) {
     final json = JsonDecoder().convert(data);
     _region = (json).map<Region>((item) => Region.fromJson(item)).toList();
-    selectedRegion = _region[0].time;
+    // selectedRegion = _region[0].time;
 
     return Scaffold(
       backgroundColor: Color(0xFF3D00E0),
@@ -117,7 +118,6 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                           setState(() {
                             selectedRegion = newValue;
                           });
-                          print(selectedRegion);
                         },
                       ),
                     ),
@@ -231,7 +231,10 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                                 'BOOK APPOINTMENT',
                                 style: TextStyle(color: Colors.white),
                               ),
-                              onPressed: () {},
+                              onPressed: () async {
+                                APIservice apIservice = APIservice();
+                                await apIservice.getServiceTime();
+                              },
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0),
                                   side: BorderSide(

@@ -1,4 +1,6 @@
-String ngrok = "https://af52dfeba474.ngrok.io/";
+String ngrok = "https://2e6aa91461a3.ngrok.io/"; // all other(deepak)
+String ngrok1 = 'https://fe17b9c19e87.ngrok.io/'; //book(aak)
+String ml = 'https://dsw.pythonanywhere.com/predict';
 String userNameText;
 String userContactText;
 String userEmailText;
@@ -11,3 +13,5 @@ String docName;
 String depName;
 Map newSlotMap;
 List slots;
+String age;
+String gender;
