@@ -109,7 +109,7 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                         ),
                         items: _region.map((Region map) {
                           return new DropdownMenuItem<String>(
-                            value: map.time,
+                            value: map.slotid.toString(),
                             child: new Text('${map.time}',
                                 style: new TextStyle(color: Colors.black)),
                           );
@@ -117,6 +117,8 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                         onChanged: (String newValue) {
                           setState(() {
                             selectedRegion = newValue;
+                            // print(selectedRegion);
+                            slotId = selectedRegion.toString();
                           });
                         },
                       ),

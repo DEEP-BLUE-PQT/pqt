@@ -1,5 +1,5 @@
-String ngrok = "https://2e6aa91461a3.ngrok.io/"; // all other(deepak)
-String ngrok1 = 'https://fe17b9c19e87.ngrok.io/'; //book(aak)
+String ngrok = "https://844a6ae85332.ngrok.io/"; // all other(deepak) // other
+String ngrok1 = 'https://5b4df8af2e18.ngrok.io/'; //book(aak) //consul
 String ml = 'https://dsw.pythonanywhere.com/predict';
 String userNameText;
 String userContactText;
@@ -15,3 +15,7 @@ Map newSlotMap;
 List slots;
 String age;
 String gender;
+int serviceMlTime; //consultation
+String slotId;
+String patientId;
+//todo use concat!
