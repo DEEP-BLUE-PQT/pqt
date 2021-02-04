@@ -11,6 +11,7 @@ class APIservice {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     age = prefs.getString("userAge");
     gender = prefs.getString('userGender').toUpperCase();
+    patientId = prefs.getString('userContact');
   }
 
   SecureStorage secureStorage = SecureStorage();
@@ -85,6 +86,40 @@ class APIservice {
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
       // newSlotMap = mapResponse["data"];
+      serviceMlTime =
+          double.parse(mapResponse['prediction'].toString()).round();
+    }
+  }
+
+  Future<String> getEntry() async {
+    Map jsonMap = {
+      "patientid": patientId,
+      "slotid": slotId,
+      "doctorid": docId,
+      "st1": serviceMlTime,
+      "pcit" :
+    };
+    // {
+    //   "patientid":"9819307031",
+    // "slotid":"4",
+    // "doctorid":"3",
+    // "pcit":"23:00:00",
+    // "st1":"05:00:00"
+    //
+    // }
+
+    var response = await http.post(
+      ngrok1,
+      body: json.encode(jsonMap),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      //
+      //todo  see error handling here
+      var mapResponse = json.decode(response.body);
     }
   }
 }
