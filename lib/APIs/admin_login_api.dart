@@ -86,28 +86,25 @@ class APIservice {
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
       // newSlotMap = mapResponse["data"];
-      serviceMlTime =
-          double.parse(mapResponse['prediction'].toString()).round();
+      serviceMlTime = mapResponse['prediction'];
     }
   }
 
   Future<String> getEntry() async {
+    String timee;
+    for (var i = 0; i < slots.length; i++) {
+      if (slots[i]["slotid"] == int.parse(slotId)) {
+        timee = slots[i]["time"];
+      }
+    }
+
     Map jsonMap = {
       "patientid": patientId,
       "slotid": slotId,
       "doctorid": docId,
       "st1": serviceMlTime,
-      "pcit" :
+      "pcit": timee.split('-')[0]
     };
-    // {
-    //   "patientid":"9819307031",
-    // "slotid":"4",
-    // "doctorid":"3",
-    // "pcit":"23:00:00",
-    // "st1":"05:00:00"
-    //
-    // }
-
     var response = await http.post(
       ngrok1,
       body: json.encode(jsonMap),
@@ -118,8 +115,8 @@ class APIservice {
     );
     if (response.statusCode == 200) {
       //
-      //todo  see error handling here
       var mapResponse = json.decode(response.body);
+      print(mapResponse);
     }
   }
 }

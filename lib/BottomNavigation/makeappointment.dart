@@ -236,6 +236,7 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                               onPressed: () async {
                                 APIservice apIservice = APIservice();
                                 await apIservice.getServiceTime();
+                                await apIservice.getEntry();
                               },
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0),
