@@ -18,16 +18,6 @@ class _DetailsState extends State<Details> {
   int _gendervalue = 1;
   List genders = ['Male', 'Female', 'Others'];
 
-  APIservice apIservice = APIservice();
-
-  getDocList() async {
-    await apIservice.getDoctorList();
-  }
-
-  getSlotsList() async {
-    await apIservice.getSlotsList();
-  }
-
   _onBasicAlertPressed(context, String title) {
     Alert(
       style: AlertStyle(
@@ -58,8 +48,6 @@ class _DetailsState extends State<Details> {
   @override
   void initState() {
     getData();
-    getDocList();
-    getSlotsList();
   }
 
   getData() async {

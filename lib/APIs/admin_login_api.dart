@@ -103,7 +103,8 @@ class APIservice {
       "slotid": slotId,
       "doctorid": docId,
       "st1": serviceMlTime,
-      "pcit": timee.split('-')[0]
+      "pcit": timee.split('-')[0],
+      "slotend": timee.split('-')[1]
     };
     var response = await http.post(
       ngrok1,

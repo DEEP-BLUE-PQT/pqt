@@ -1,6 +1,6 @@
-String ngrok = "https://e2bb057b8851.ngrok.io/"; // all other(deepak) // other
+String ngrok = "https://d019f6e60d8c.ngrok.io/"; // all other(deepak) // other
 String ngrok1 =
-    'https://afcc7b15775d.ngrok.io/consultation'; //book(aak) //consul
+    'https://c844e0d6a745.ngrok.io/consultation'; //book(aak) //consul
 String ml = 'https://dsw.pythonanywhere.com/predict';
 String userNameText;
 String userContactText;
