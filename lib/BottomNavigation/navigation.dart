@@ -20,49 +20,8 @@ class _BnavigationState extends State<Bnavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              child: Column(
-                children: <Widget>[
-                  Container(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text("username"),
-                ],
-              ),
-            ),
-            ListTile(
-              title: Text("All Post"),
-              trailing: Icon(Icons.launch),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text("New Story"),
-              trailing: Icon(Icons.add),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text("Settings"),
-              trailing: Icon(Icons.settings),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text("Feedback"),
-              trailing: Icon(Icons.feedback),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text("Logout"),
-              trailing: Icon(Icons.power_settings_new),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
       appBar: AppBar(
+        leading: Container(),
         backgroundColor: Color(0xFF3D00E0),
         title: Text("Make Appointment"),
       ),

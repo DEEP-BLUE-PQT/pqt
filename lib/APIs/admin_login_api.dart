@@ -104,7 +104,7 @@ class APIservice {
       "doctorid": docId,
       "st1": serviceMlTime,
       "pcit": timee.split('-')[0],
-      "slotend": timee.split('-')[1]
+      // "slotend": timee.split('-')[1]
     };
     var response = await http.post(
       ngrok1,
@@ -117,7 +117,9 @@ class APIservice {
     if (response.statusCode == 200) {
       //
       var mapResponse = json.decode(response.body);
-      print(mapResponse);
+      return1 = mapResponse['return1'];
+      return2 = mapResponse['return2'];
+      return3 = mapResponse['return3'];
     }
   }
 }

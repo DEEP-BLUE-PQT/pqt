@@ -39,6 +39,8 @@ dependencies:
   rflutter_alert: ^1.1.0
   shared_preferences: ^0.5.12+4
   ndialog: ^3.2.1
+  expandable: ^4.1.4
+  cron: ^0.2.4
 
 
 

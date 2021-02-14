@@ -2,6 +2,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
+import 'package:flutter_app_pqt_splash/BottomNavigation/makeappointment.dart';
+import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/navigation.dart';
 import 'package:flutter_app_pqt_splash/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -191,7 +193,8 @@ class _DetailsState extends State<Details> {
                                 userEmailText = userEmail.text;
                                 userAgeText = userAge.text;
                                 userGenderText = userGender.text;
-                                Navigator.pushNamed(context, Bnavigation.route);
+                                Navigator.pushNamed(
+                                    context, Myappointment.route);
                               }
                             },
                             shape: RoundedRectangleBorder(
