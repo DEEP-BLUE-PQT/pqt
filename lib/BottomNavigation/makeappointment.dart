@@ -234,6 +234,7 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                                 style: TextStyle(color: Colors.white),
                               ),
                               onPressed: () async {
+                                flag = true;
                                 APIservice apIservice = APIservice();
                                 await apIservice.getServiceTime();
                                 await apIservice.getEntry();
