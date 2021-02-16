@@ -98,7 +98,10 @@ class Card1 extends StatelessWidget {
                   docName,
                 ),
                 subtitle: Text(
-                  'Pediatrician\ncheck-in-time : 5:00 pm',
+                  depName +
+                      '\n' +
+                      "Doctor check in time " +
+                      timee.split('-')[0],
                 )),
             ScrollOnExpand(
               scrollOnExpand: true,
@@ -134,18 +137,9 @@ class Card1 extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             ListTile(
-                              title: Text('Registration Queue'),
-                              subtitle: Text('check-in-time : 5:00'),
-                              trailing: Text('20 mins'),
-                            ),
-                            Divider(
-                              color: Color(0xFF3D00E0),
-                              thickness: 2,
-                            ),
-                            ListTile(
                               title: Text('Consultation Queue'),
                               subtitle: Text('check-in-time : 5:00'),
-                              trailing: Text('20 mins'),
+                              trailing: Text(return1),
                             ),
                             Divider(
                               color: Color(0xFF3D00E0),
