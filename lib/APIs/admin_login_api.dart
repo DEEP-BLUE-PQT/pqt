@@ -90,8 +90,43 @@ class APIservice {
     }
   }
 
+  Future<String> test() async {
+    var response = await http.get(ngrok3);
+    if (response.statusCode == 200) {
+      var mapResponse = json.decode(response.body);
+      newWaitingTime = mapResponse["wt1"];
+    }
+  }
+
+  Future<String> test2() async {
+    var response = await http.get(ngrok4);
+    if (response.statusCode == 200) {
+      var mapResponse = json.decode(response.body);
+      wt2 = mapResponse["wt2"];
+    }
+  }
+
+  Future<String> read() async {
+    Map jsonMap = {
+      "patientid": patientId,
+      "doctorid": docId,
+      "slotid": slotId,
+    };
+    var response = await http.post(
+      ngrok2,
+      body: json.encode(jsonMap),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      var mapResponse = json.decode(response.body);
+      wt1 = mapResponse["wt1"];
+    }
+  }
+
   Future<String> getEntry() async {
-    String timee;
     for (var i = 0; i < slots.length; i++) {
       if (slots[i]["slotid"] == int.parse(slotId)) {
         timee = slots[i]["time"];
@@ -117,6 +152,9 @@ class APIservice {
     if (response.statusCode == 200) {
       //
       var mapResponse = json.decode(response.body);
+      print(mapResponse);
+      trueorfalse = mapResponse["success"];
+      message = mapResponse["message"];
       return1 = mapResponse['return1'];
       return2 = mapResponse['return2'];
       return3 = mapResponse['return3'];

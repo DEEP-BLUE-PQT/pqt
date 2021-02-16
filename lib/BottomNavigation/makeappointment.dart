@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../constants.dart';
 import 'dialog.dart';
+import 'myappointment.dart';
+import 'navigation.dart';
 
 class MakeAppointment extends StatefulWidget {
   static String route = 'Makeappointment';
@@ -13,6 +16,42 @@ class MakeAppointment extends StatefulWidget {
 //REGION HI SLOT H
 
 class _MakeAppointmentState extends State<MakeAppointment> {
+  _onBasicAlertPressed3(context) {
+    Alert(
+      style: AlertStyle(
+        isButtonVisible: false,
+        isCloseButton: true,
+        backgroundColor: Colors.white,
+      ),
+      context: context,
+      title: "Please Select Slot",
+    ).show();
+  }
+
+  _onBasicAlertPressed1(context) {
+    Alert(
+      style: AlertStyle(
+        isButtonVisible: false,
+        isCloseButton: true,
+        backgroundColor: Colors.white,
+      ),
+      context: context,
+      title: message,
+    ).show();
+  }
+
+  _onBasicAlertPressed2(context) {
+    Alert(
+      style: AlertStyle(
+        isButtonVisible: false,
+        isCloseButton: true,
+        backgroundColor: Colors.white,
+      ),
+      context: context,
+      title: message,
+    ).show();
+  }
+
   String data = jsonEncode(slots);
   List<Region> _region = [];
   String selectedRegion;
@@ -59,14 +98,38 @@ class _MakeAppointmentState extends State<MakeAppointment> {
               height: 135,
               width: 380,
               child: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(docName,
-                          style: TextStyle(color: Colors.white, fontSize: 25)),
-                      Text(depName,
-                          style: TextStyle(color: Colors.white, fontSize: 15)),
-                    ]),
+                child: Row(
+                  children: [
+                    FlatButton.icon(
+                      label: Text(
+                        "Back",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, Bnavigation.route);
+                      },
+                    ),
+                    SizedBox(
+                      width: 30.0,
+                    ),
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(docName,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 25)),
+                          Text(depName,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15)),
+                        ]),
+                  ],
+                ),
               ),
             ),
             Container(
@@ -234,10 +297,24 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                                 style: TextStyle(color: Colors.white),
                               ),
                               onPressed: () async {
-                                flag = true;
-                                APIservice apIservice = APIservice();
-                                await apIservice.getServiceTime();
-                                await apIservice.getEntry();
+                                if (slotId == null) {
+                                  _onBasicAlertPressed3(context);
+                                } else {
+                                  flag = true;
+
+                                  APIservice apIservice = APIservice();
+                                  await apIservice.getServiceTime();
+                                  await apIservice.getEntry();
+
+                                  if (trueorfalse == "True") {
+                                    await _onBasicAlertPressed1(context);
+                                    //todo see alert
+                                    Navigator.pushNamed(
+                                        context, Myappointment.route);
+                                  } else if (trueorfalse == "False") {
+                                    await _onBasicAlertPressed2(context);
+                                  }
+                                }
                               },
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0),
