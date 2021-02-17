@@ -298,21 +298,19 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                               ),
                               onPressed: () async {
                                 if (slotId == null) {
-                                  _onBasicAlertPressed3(context);
                                 } else {
                                   flag = true;
 
                                   APIservice apIservice = APIservice();
                                   await apIservice.getServiceTime();
                                   await apIservice.getEntry();
-
                                   if (trueorfalse == "True") {
-                                    await _onBasicAlertPressed1(context);
                                     //todo see alert
+                                    dispTorF = true;
                                     Navigator.pushNamed(
                                         context, Myappointment.route);
                                   } else if (trueorfalse == "False") {
-                                    await _onBasicAlertPressed2(context);
+                                    print("herer          dssdsdsd");
                                   }
                                 }
                               },
