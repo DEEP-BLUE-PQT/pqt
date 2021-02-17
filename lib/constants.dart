@@ -1,9 +1,5 @@
-String ngrok = "https://a1478f43125e.ngrok.io/"; // all other(deepak) // other
-String ngrok1 =
-    'https://555b6117ac52.ngrok.io/consultation'; //book(aak) //consul
-String ngrok2 = 'https://43e72ef49acb.ngrok.io/read'; //read
-String ngrok3 = 'https://43e72ef49acb.ngrok.io/test';
-String ngrok4 = 'https://43e72ef49acb.ngrok.io/test2';
+String ngrok = "https://9ba14e7b7a0e.ngrok.io/"; // all other(deepak) // other
+String ngrok1 = 'https://3cf2933a5c58.ngrok.io/'; //book(aak) //consul
 String ml = 'https://dsw.pythonanywhere.com/predict';
 String userNameText;
 String userContactText;
@@ -25,14 +21,20 @@ String patientId;
 int oldWaitingTime = 5; // coming from consultation
 int displayTime = 5; //equal to consul
 int newWaitingTime;
-int wt2; //take same in consul and update this
 String return1;
 String return2;
 String return3;
 String trueorfalse = "null"; //consul ka feedback
 int difference;
-String wt1;
 String message;
 bool flag = false;
 String timee;
+String pcit1 = '1'; //cron ko schedule
+String pcit2 = '2';
+String pcit3 = '3';
+int wt1;
+int wt2; //fake
+int wt3; //fake
+String scheduler;
+bool dispTorF = false;
 //todo use concat!

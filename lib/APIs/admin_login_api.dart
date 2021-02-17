@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/secure_storage/storage.dart';
 import 'package:http/http.dart' as http;
@@ -90,21 +91,21 @@ class APIservice {
     }
   }
 
-  Future<String> test() async {
-    var response = await http.get(ngrok3);
-    if (response.statusCode == 200) {
-      var mapResponse = json.decode(response.body);
-      newWaitingTime = mapResponse["wt1"];
-    }
-  }
-
-  Future<String> test2() async {
-    var response = await http.get(ngrok4);
-    if (response.statusCode == 200) {
-      var mapResponse = json.decode(response.body);
-      wt2 = mapResponse["wt2"];
-    }
-  }
+  // Future<String> test() async {
+  //   var response = await http.get(ngrok3);
+  //   if (response.statusCode == 200) {
+  //     var mapResponse = json.decode(response.body);
+  //     newWaitingTime = mapResponse["wt1"];
+  //   }
+  // }
+  //
+  // Future<String> test2() async {
+  //   var response = await http.get(ngrok4);
+  //   if (response.statusCode == 200) {
+  //     var mapResponse = json.decode(response.body);
+  //     wt2 = mapResponse["wt2"];
+  //   }
+  // }
 
   Future<String> read() async {
     Map jsonMap = {
@@ -113,7 +114,7 @@ class APIservice {
       "slotid": slotId,
     };
     var response = await http.post(
-      ngrok2,
+      ngrok1 + 'readcons',
       body: json.encode(jsonMap),
       headers: {
         'Content-type': 'application/json',
@@ -122,7 +123,8 @@ class APIservice {
     );
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
-      wt1 = mapResponse["wt1"];
+      newWaitingTime = mapResponse["wt1"];
+      pcit1 = mapResponse["pcit1"];
     }
   }
 
@@ -138,11 +140,12 @@ class APIservice {
       "slotid": slotId,
       "doctorid": docId,
       "st1": serviceMlTime,
-      "pcit": timee.split('-')[0],
+      "pcit": "01:19:00"
+      // "pcit": timee.split('-')[0],
       // "slotend": timee.split('-')[1]
     };
     var response = await http.post(
-      ngrok1,
+      ngrok1 + 'consultation',
       body: json.encode(jsonMap),
       headers: {
         'Content-type': 'application/json',
@@ -152,12 +155,37 @@ class APIservice {
     if (response.statusCode == 200) {
       //
       var mapResponse = json.decode(response.body);
-      print(mapResponse);
       trueorfalse = mapResponse["success"];
-      message = mapResponse["message"];
-      return1 = mapResponse['return1'];
-      return2 = mapResponse['return2'];
-      return3 = mapResponse['return3'];
+      pcit1 = mapResponse["pcit1"];
+      pcit2 = mapResponse["pcit2"];
+      pcit3 = mapResponse["pcit3"];
+      oldWaitingTime = mapResponse["wt1"];
+      displayTime = oldWaitingTime;
+      wt2 = mapResponse["wt2"];
+      wt3 = mapResponse["wt3"];
+      scheduler = mapResponse["scheduler"];
+    }
+  }
+
+  Future<String> readBM() async {
+    Map jsonMap = {
+      "patientid": patientId,
+    };
+    var response = await http.post(
+      ngrok1 + 'readbm',
+      body: json.encode(jsonMap),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      //
+      var mapResponse = json.decode(response.body);
+      pcit2 = mapResponse["pcit2"];
+      pcit3 = mapResponse["pcit3"];
+      wt2 = mapResponse["wt2"];
+      wt3 = mapResponse["wt3"];
     }
   }
 }
