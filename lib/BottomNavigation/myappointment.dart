@@ -42,38 +42,45 @@ class _MyappointmentState extends State<Myappointment> {
       _timer1.cancel();
       _timer1 = null;
     } else {
-      _timer1 =
-          new Timer.periodic(const Duration(minutes: 2), // 5 mins instead of 3s
-              (Timer timer1) async {
-        await apIservice.read();
-        setState(
-          () {
-            newWaitingTime;
-            difference = newWaitingTime - oldWaitingTime;
-            print("I am old Time before update " + oldWaitingTime.toString());
-            oldWaitingTime = newWaitingTime;
-            displayTime = displayTime + difference;
-            if (check(displayTime)) {
-              print("I am new waiting time API " + newWaitingTime.toString());
-              print("I am diff " + difference.toString());
-              print("I am old Time After update " + oldWaitingTime.toString());
-              print("I am display Time  " + displayTime.toString());
-            } else {
-              print("I am done here timer1");
-              timer1.cancel();
-              callmyAPI();
-              startTimer3();
-            }
+      _timer1 = new Timer.periodic(
+        const Duration(minutes: 2), // 5 mins instead of 3s
+        (Timer timer1) async {
+          await apIservice.read();
+          setState(
+            () {
+              newWaitingTime;
+              difference = newWaitingTime - oldWaitingTime;
+              print("I am old Time before update " + oldWaitingTime.toString());
+              oldWaitingTime = newWaitingTime;
+              displayTime = displayTime + difference;
+              if (check(displayTime)) {
+                print("I am new waiting time API " + newWaitingTime.toString());
+                print("I am diff " + difference.toString());
+                print(
+                    "I am old Time After update " + oldWaitingTime.toString());
+                print("I am display Time  " + displayTime.toString());
+              } else {
+                displayTime = 0;
+                print("I am done here timer1");
+                timer1.cancel();
+                callmyAPI();
+                while (success == 0) {
+                  callmyAPI();
+                }
 
-            // startTimer2();
-            // set state(
-            // new_waiting = res from api
-            // difference = new_waiting - old_waiting
-            // old_waiting = old_waiting + difference
-            //)
-          },
-        );
-      });
+                startTimer3();
+              }
+
+              // startTimer2();
+              // set state(
+              // new_waiting = res from api
+              // difference = new_waiting - old_waiting
+              // old_waiting = old_waiting + difference
+              //)
+            },
+          );
+        },
+      );
     }
   }
 
@@ -84,13 +91,14 @@ class _MyappointmentState extends State<Myappointment> {
       _timer2 = null;
     } else {
       _timer2 = new Timer.periodic(
-        const Duration(minutes: 1), // 1 min
+        const Duration(seconds: 55), // 1 min
         (Timer timer2) {
           setState(
             () {
               if (displayTime < 1) {
                 print("I am done here timer2");
                 //old_waiting<0
+                displayTime = 0;
                 timer2.cancel();
               } else {
                 displayTime = displayTime - 1;
