@@ -124,6 +124,7 @@ class APIservice {
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
       newWaitingTime = mapResponse["wt1"];
+      successcons = mapResponse["success"];
     }
   }
 
@@ -182,11 +183,14 @@ class APIservice {
     if (response.statusCode == 200) {
       //
       var mapResponse = json.decode(response.body);
-      pcit2 = mapResponse["pcit2"];
-      pcit3 = mapResponse["pcit3"];
-      wt2 = mapResponse["wt2"];
-      wt3 = mapResponse["wt3"];
       success = mapResponse['success'];
+      if (success == 1) {
+        pcit2 = mapResponse["pcit2"];
+        pcit3 = mapResponse["pcit3"];
+        wt2 = mapResponse["wt2"];
+        wt3 = mapResponse["wt3"];
+        print(mapResponse);
+      }
     }
   }
 }

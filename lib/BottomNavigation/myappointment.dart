@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cron/cron.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
@@ -24,6 +25,7 @@ class _MyappointmentState extends State<Myappointment> {
     if (value > 0) {
       return true;
     } else {
+      displayTime = 0;
       return false;
     }
   }
@@ -36,6 +38,7 @@ class _MyappointmentState extends State<Myappointment> {
   Timer _timer2;
   Timer _timer3;
   Timer _timer4;
+  Timer _timer5;
 
   void startTimer() {
     if (_timer1 != null) {
@@ -45,7 +48,14 @@ class _MyappointmentState extends State<Myappointment> {
       _timer1 = new Timer.periodic(
         const Duration(minutes: 2), // 5 mins instead of 3s
         (Timer timer1) async {
-          await apIservice.read();
+          if (successcons == 1) {
+            await apIservice.read();
+            if (successcons == 0) {
+              timer1.cancel();
+              startTimer5();
+            }
+          }
+
           setState(
             () {
               newWaitingTime;
@@ -60,25 +70,32 @@ class _MyappointmentState extends State<Myappointment> {
                     "I am old Time After update " + oldWaitingTime.toString());
                 print("I am display Time  " + displayTime.toString());
               } else {
-                displayTime = 0;
-                print("I am done here timer1");
+                print("I am done here timer 1");
                 timer1.cancel();
-                callmyAPI();
-                while (success == 0) {
-                  callmyAPI();
-                }
 
-                startTimer3();
+                startTimer5();
               }
-
-              // startTimer2();
-              // set state(
-              // new_waiting = res from api
-              // difference = new_waiting - old_waiting
-              // old_waiting = old_waiting + difference
-              //)
             },
           );
+        },
+      );
+    }
+  }
+
+  void startTimer5() {
+    if (_timer5 != null) {
+      _timer5.cancel();
+      _timer5 = null;
+    } else {
+      _timer5 = new Timer.periodic(
+        const Duration(minutes: 1), // 5 mins instead of 3s
+        (Timer timer5) async {
+          await apIservice.readBM();
+          if (success == 1) {
+            timer5.cancel();
+
+            startTimer3();
+          }
         },
       );
     }
@@ -97,8 +114,8 @@ class _MyappointmentState extends State<Myappointment> {
             () {
               if (displayTime < 1) {
                 print("I am done here timer2");
+                displayTime;
                 //old_waiting<0
-                displayTime = 0;
                 timer2.cancel();
               } else {
                 displayTime = displayTime - 1;
@@ -127,6 +144,9 @@ class _MyappointmentState extends State<Myappointment> {
                 print("I am done here timer 3");
                 //old_waiting<0
                 timer3.cancel();
+                sleep(
+                  Duration(minutes: 4),
+                );
                 startTimer4();
               } else {
                 wt2 = wt2 - 1;
@@ -141,7 +161,7 @@ class _MyappointmentState extends State<Myappointment> {
   }
 
   void startTimer4() {
-    print("I am startTimer 3");
+    print("I am startTimer 4");
     if (_timer4 != null) {
       _timer4.cancel();
       _timer4 = null;
@@ -152,12 +172,12 @@ class _MyappointmentState extends State<Myappointment> {
           setState(
             () {
               if (wt3 < 1) {
-                print("I am done here timer 3");
+                print("I am done here timer 4");
                 //old_waiting<0
                 timer3.cancel();
               } else {
                 wt3 = wt3 - 1;
-                print("I am GENERAL wt2 " + wt3.toString());
+                print("I am GENERAL wt3 " + wt3.toString());
                 //set state (old_waiting= old_waiting - 1)
               }
             },
