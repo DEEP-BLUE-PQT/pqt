@@ -17,16 +17,17 @@ class _PostState extends State<Post> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leading: Container(),
         backgroundColor: Color(0xFF3D00E0),
-        title: Text("widget.title"),
+        title: Text("Post"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'I am From post appointment',
+              '',
             ),
           ],
         ),

@@ -7,6 +7,7 @@ import 'package:ff_navigation_bar/ff_navigation_bar_theme.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:expandable/expandable.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/post.dart';
 import 'package:flutter_app_pqt_splash/constants.dart';
@@ -212,9 +213,18 @@ class _MyappointmentState extends State<Myappointment> {
     }
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leading: Container(),
         backgroundColor: Color(0xFF3D00E0),
-        title: Text("Make Appointment"),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "My Appointment",
+            ),
+          ],
+        ),
       ),
       body: flag
           ? ExpandableTheme(
@@ -339,9 +349,74 @@ class _MyappointmentState extends State<Myappointment> {
                 ],
               ),
             )
-          : Container(
-              child: Text("here"),
-              //todo add something
+          : ExpandableTheme(
+              data: const ExpandableThemeData(
+                iconColor: Color(0xFF3D00E0),
+                useInkWell: true,
+              ),
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
+                children: <Widget>[
+                  // Card1(),
+                  ExpandableNotifier(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Card(
+                        color: Colors.blue[100],
+                        clipBehavior: Clip.antiAlias,
+                        child: Column(
+                          children: <Widget>[
+                            ListTile(
+                              title: Center(
+                                child: Text(
+                                  "No appointment",
+                                ),
+                              ),
+                              subtitle: Text(
+                                "",
+                              ),
+                            ),
+                            ScrollOnExpand(
+                              scrollOnExpand: true,
+                              scrollOnCollapse: false,
+                              child: ExpandablePanel(
+                                theme: const ExpandableThemeData(
+                                  headerAlignment:
+                                      ExpandablePanelHeaderAlignment.center,
+                                  tapBodyToCollapse: true,
+                                ),
+                                header: Container(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      "",
+                                      style: TextStyle(
+                                          color: Color(0xFF3D00E0),
+                                          fontSize: 15),
+                                    )),
+                                /*collapsed: Text(
+                      loremIpsum,
+                      softWrap: true,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),*/
+                                expanded: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 2,
+                                      color: Color(0xFF3D00E0),
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
