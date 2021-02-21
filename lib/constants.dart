@@ -1,5 +1,5 @@
-String ngrok = "https://de88cb6c2392.ngrok.io/"; // all other(deepak) // other
-String ngrok1 = 'https://c152c408c7e7.ngrok.io/'; //book(aak) //consul
+String ngrok = "https://ea34788f1e4f.ngrok.io/"; // all other(deepak) // other
+String ngrok1 = 'https://59a8f5868fc7.ngrok.io/'; //book(aak) //consul
 String ml = 'https://dsw.pythonanywhere.com/predict';
 String userNameText;
 String userContactText;
@@ -39,4 +39,5 @@ String scheduler;
 bool dispTorF = false;
 int success = 0;
 int successcons = 1;
+String nameOfPatient;
 //todo use concat!

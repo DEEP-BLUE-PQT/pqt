@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../constants.dart';
 import 'dialog.dart';
+import 'dialog2.dart';
 import 'myappointment.dart';
 import 'navigation.dart';
 
@@ -307,10 +308,19 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                                   if (trueorfalse == "True") {
                                     //todo see alert
                                     dispTorF = true;
-                                    Navigator.pushNamed(
-                                        context, Myappointment.route);
+                                    final result = await showDialog<bool>(
+                                      context: context,
+                                      builder: (_) {
+                                        return MyDialog2();
+                                      },
+                                    );
+                                    if (result) {
+                                      setState(() {});
+                                    }
+                                    // Navigator.pushNamed(
+                                    //     context, Myappointment.route);
                                   } else if (trueorfalse == "False") {
-                                    print("herer          dssdsdsd");
+                                    _onBasicAlertPressed2(context);
                                   }
                                 }
                               },

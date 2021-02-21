@@ -13,6 +13,7 @@ class APIservice {
     age = prefs.getString("userAge");
     gender = prefs.getString('userGender').toUpperCase();
     patientId = prefs.getString('userContact');
+    nameOfPatient = prefs.getString('userName');
   }
 
   SecureStorage secureStorage = SecureStorage();
@@ -134,14 +135,15 @@ class APIservice {
         timee = slots[i]["time"];
       }
     }
-
+    print("===========================");
+    print(patientId + nameOfPatient);
     Map jsonMap = {
-      "patientid": patientId,
+      "patientid": patientId + ':' + nameOfPatient,
       "slotid": slotId,
       "doctorid": docId,
       "st1": serviceMlTime,
       "pcit": timee.split('-')[0],
-      // "slotend": timee.split('-')[1]
+      "slotend": timee.split('-')[1]
     };
     var response = await http.post(
       ngrok1 + 'consultation',
@@ -156,15 +158,18 @@ class APIservice {
       var mapResponse = json.decode(response.body);
       print(mapResponse);
       trueorfalse = mapResponse["success"];
-      pcit1 = mapResponse["pcit1"];
-      print(pcit1);
-      pcit2 = mapResponse["pcit2"];
-      pcit3 = mapResponse["pcit3"];
-      oldWaitingTime = mapResponse["wt1"];
-      displayTime = oldWaitingTime;
-      wt2 = mapResponse["wt2"];
-      wt3 = mapResponse["wt3"];
-      scheduler = mapResponse["scheduler"];
+      message = mapResponse["message"];
+      if (trueorfalse == 'True') {
+        pcit1 = mapResponse["pcit1"];
+        print(pcit1);
+        pcit2 = mapResponse["pcit2"];
+        pcit3 = mapResponse["pcit3"];
+        oldWaitingTime = mapResponse["wt1"];
+        displayTime = oldWaitingTime;
+        wt2 = mapResponse["wt2"];
+        wt3 = mapResponse["wt3"];
+        scheduler = mapResponse["scheduler"];
+      }
     }
   }
 
