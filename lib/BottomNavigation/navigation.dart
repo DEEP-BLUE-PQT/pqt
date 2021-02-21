@@ -21,6 +21,7 @@ class _BnavigationState extends State<Bnavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leading: Container(),
         backgroundColor: Color(0xFF3D00E0),
         title: Text("Make Appointment"),
