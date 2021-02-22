@@ -138,7 +138,7 @@ class APIservice {
     print("===========================");
     print(patientId + nameOfPatient);
     Map jsonMap = {
-      "patientid": patientId + ':' + nameOfPatient,
+      "patientid": patientId,
       "slotid": slotId,
       "doctorid": docId,
       "st1": serviceMlTime,

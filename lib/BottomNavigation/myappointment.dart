@@ -43,6 +43,7 @@ class _MyappointmentState extends State<Myappointment> {
   Timer _timer5;
 
   void startTimer() {
+    print("I starttimer was called");
     if (_timer1 != null) {
       _timer1.cancel();
       _timer1 = null;
@@ -85,6 +86,7 @@ class _MyappointmentState extends State<Myappointment> {
   }
 
   void startTimer5() {
+    print("I starttimer 5 was called");
     if (_timer5 != null) {
       _timer5.cancel();
       _timer5 = null;
@@ -193,6 +195,7 @@ class _MyappointmentState extends State<Myappointment> {
     print("I cron was called");
     var cron = new Cron();
     cron.schedule(new Schedule.parse(scheduler), () async {
+      print("I am here");
       startTimer();
       startTimer2();
     });
@@ -396,7 +399,7 @@ class _MyappointmentState extends State<Myappointment> {
         items: [
           FFNavigationBarItem(
             iconData: Icons.add,
-            label: 'Make Appointment',
+            label: 'Book Appointment',
             selectedBackgroundColor: Color(0xFF3D00E0),
           ),
           FFNavigationBarItem(
