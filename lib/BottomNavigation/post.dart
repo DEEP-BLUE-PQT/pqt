@@ -58,7 +58,7 @@ class _PostState extends State<Post> {
         items: [
           FFNavigationBarItem(
             iconData: Icons.add,
-            label: 'Make Appointment',
+            label: 'Book Appointment',
             selectedBackgroundColor: Color(0xFF3D00E0),
           ),
           FFNavigationBarItem(

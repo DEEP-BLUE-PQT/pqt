@@ -11,6 +11,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/post.dart';
 import 'package:flutter_app_pqt_splash/constants.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'navigation.dart';
 
@@ -42,6 +43,7 @@ class _MyappointmentState extends State<Myappointment> {
   Timer _timer5;
 
   void startTimer() {
+    print("I starttimer was called");
     if (_timer1 != null) {
       _timer1.cancel();
       _timer1 = null;
@@ -84,6 +86,7 @@ class _MyappointmentState extends State<Myappointment> {
   }
 
   void startTimer5() {
+    print("I starttimer 5 was called");
     if (_timer5 != null) {
       _timer5.cancel();
       _timer5 = null;
@@ -192,6 +195,7 @@ class _MyappointmentState extends State<Myappointment> {
     print("I cron was called");
     var cron = new Cron();
     cron.schedule(new Schedule.parse(scheduler), () async {
+      print("I am here");
       startTimer();
       startTimer2();
     });
@@ -349,73 +353,24 @@ class _MyappointmentState extends State<Myappointment> {
                 ],
               ),
             )
-          : ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Color(0xFF3D00E0),
-                useInkWell: true,
-              ),
-              child: ListView(
-                physics: const BouncingScrollPhysics(),
-                children: <Widget>[
-                  // Card1(),
-                  ExpandableNotifier(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Card(
-                        color: Colors.blue[100],
-                        clipBehavior: Clip.antiAlias,
-                        child: Column(
-                          children: <Widget>[
-                            ListTile(
-                              title: Center(
-                                child: Text(
-                                  "No appointment",
-                                ),
-                              ),
-                              subtitle: Text(
-                                "",
-                              ),
-                            ),
-                            ScrollOnExpand(
-                              scrollOnExpand: true,
-                              scrollOnCollapse: false,
-                              child: ExpandablePanel(
-                                theme: const ExpandableThemeData(
-                                  headerAlignment:
-                                      ExpandablePanelHeaderAlignment.center,
-                                  tapBodyToCollapse: true,
-                                ),
-                                header: Container(
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Color(0xFF3D00E0),
-                                          fontSize: 15),
-                                    )),
-                                /*collapsed: Text(
-                      loremIpsum,
-                      softWrap: true,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),*/
-                                expanded: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      width: 2,
-                                      color: Color(0xFF3D00E0),
-                                    ),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+          : Center(
+              child: Container(
+                child: Center(
+                  child: Text(
+                    "No Appointment",
+                    style: GoogleFonts.alike(
+                      fontSize: 25,
+                      color: Colors.blue[700],
                     ),
-                  )
-                ],
+                  ),
+                ),
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                    color: Colors.white70,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    )),
               ),
             ),
       bottomNavigationBar: FFNavigationBar(
@@ -444,7 +399,7 @@ class _MyappointmentState extends State<Myappointment> {
         items: [
           FFNavigationBarItem(
             iconData: Icons.add,
-            label: 'Make Appointment',
+            label: 'Book Appointment',
             selectedBackgroundColor: Color(0xFF3D00E0),
           ),
           FFNavigationBarItem(

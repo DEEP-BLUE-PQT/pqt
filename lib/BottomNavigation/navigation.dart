@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/makeappointment.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/post.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
 import 'makeappointment2follower.dart';
@@ -21,10 +22,20 @@ class _BnavigationState extends State<Bnavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add_call),
+            color: 1 == 1 ? Colors.white : Colors.white54,
+            onPressed: () {
+              launch("tel://21213123123");
+            },
+            iconSize: 35,
+          ),
+        ],
         centerTitle: true,
         leading: Container(),
         backgroundColor: Color(0xFF3D00E0),
-        title: Text("Make Appointment"),
+        title: Text("Doctors List"),
       ),
       body: Center(
         child: Column(
@@ -137,7 +148,7 @@ class _BnavigationState extends State<Bnavigation> {
         items: [
           FFNavigationBarItem(
             iconData: Icons.add,
-            label: 'Make Appointment',
+            label: 'Book Appointment',
             selectedBackgroundColor: Color(0xFF3D00E0),
           ),
           FFNavigationBarItem(
