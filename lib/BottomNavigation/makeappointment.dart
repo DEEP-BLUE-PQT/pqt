@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -8,6 +10,7 @@ import 'dialog.dart';
 import 'dialog2.dart';
 import 'myappointment.dart';
 import 'navigation.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 class MakeAppointment extends StatefulWidget {
   static String route = 'Makeappointment';
@@ -17,6 +20,12 @@ class MakeAppointment extends StatefulWidget {
 //REGION HI SLOT H
 
 class _MakeAppointmentState extends State<MakeAppointment> {
+  APIservice apIservice = APIservice();
+
+  getSlots() async {
+    await apIservice.getSlots();
+  }
+
   _onBasicAlertPressed3(context) {
     Alert(
       style: AlertStyle(
@@ -53,8 +62,6 @@ class _MakeAppointmentState extends State<MakeAppointment> {
     ).show();
   }
 
-  String data = jsonEncode(slots);
-  List<Region> _region = [];
   String selectedRegion;
 
   int _value = null;
@@ -85,10 +92,6 @@ class _MakeAppointmentState extends State<MakeAppointment> {
 
   @override
   Widget build(BuildContext context) {
-    final json = JsonDecoder().convert(data);
-    _region = (json).map<Region>((item) => Region.fromJson(item)).toList();
-    // selectedRegion = _region[0].time;
-
     return Scaffold(
       backgroundColor: Color(0xFF3D00E0),
       body: SingleChildScrollView(
@@ -151,43 +154,124 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                   //       ),
                   //     )),
                   Center(
-                      child: Container(
-                    child: ListTile(
-                      dense: true,
-                      leading: Text(
-                        'TIME',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF3D00E0),
-                        ),
-                      ),
-                      trailing: DropdownButton<String>(
-                        value: selectedRegion,
-                        isDense: true,
-                        hint: Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            "Select Slot",
-                            style: TextStyle(color: Colors.grey),
+                    child: Container(
+                      child: ListTile(
+                        dense: true,
+                        leading: Text(
+                          'DATE',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF3D00E0),
                           ),
                         ),
-                        items: _region.map((Region map) {
-                          return new DropdownMenuItem<String>(
-                            value: map.slotid.toString(),
-                            child: new Text('${map.time}',
-                                style: new TextStyle(color: Colors.black)),
-                          );
-                        }).toList(),
-                        onChanged: (String newValue) {
-                          setState(() {
-                            selectedRegion = newValue;
-                            // print(selectedRegion);
-                            slotId = selectedRegion.toString();
-                          });
-                        },
+                        trailing: DropdownButton(
+                          hint: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              "Select Date",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                          items: datesList.map((valueItem) {
+                            return DropdownMenuItem(
+                              value: valueItem,
+                              child: Text(valueItem),
+                            );
+                          }).toList(),
+                          value: dateChoosen,
+                          onChanged: (newValue) async {
+                            setState(
+                              () {
+                                dateChoosen = newValue;
+                              },
+                            );
+                            await getSlots();
+                            setState(() {
+                              slotnew;
+                            });
+                          },
+                        ),
                       ),
                     ),
-                  )),
+                  ),
+                  Center(
+                    child: Container(
+                      child: ListTile(
+                        dense: true,
+                        leading: Text(
+                          'SLOTS',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF3D00E0),
+                          ),
+                        ),
+                        trailing: DropdownButton(
+                          hint: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              "Select Slot",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                          items: slotnew.map((valueItem) {
+                            return DropdownMenuItem(
+                              value: valueItem,
+                              child: Text(valueItem),
+                            );
+                          }).toList(),
+                          value: slotChoosen,
+                          onChanged: (newValue) async {
+                            setState(
+                              () {
+                                slotChoosen = newValue;
+                                slotId = slot[slotChoosen];
+                                print(slotId);
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // Center(
+                  //     child: Container(
+                  //   child: ListTile(
+                  //     dense: true,
+                  //     leading: Text(
+                  //       'TIME',
+                  //       style: TextStyle(
+                  //         fontWeight: FontWeight.w500,
+                  //         color: Color(0xFF3D00E0),
+                  //       ),
+                  //     ),
+                  //     trailing: DropdownButton<String>(
+                  //       value: selectedRegion,
+                  //       isDense: true,
+                  //       hint: Align(
+                  //         alignment: Alignment.centerRight,
+                  //         child: Text(
+                  //           "Select Slot",
+                  //           style: TextStyle(color: Colors.grey),
+                  //         ),
+                  //       ),
+                  //       items: _region.map((Region map) {
+                  //         return new DropdownMenuItem<String>(
+                  //           value: map.slotid.toString(),
+                  //           child: new Text('${map.time}',
+                  //               style: new TextStyle(color: Colors.black)),
+                  //         );
+                  //       }).toList(),
+                  //       onChanged: (String newValue) {
+                  //         setState(() {
+                  //           selectedRegion = newValue;
+                  //           // print(selectedRegion);
+                  //           slotId = selectedRegion.toString();
+                  //         });
+                  //       },
+                  //     ),
+                  //   ),
+                  // )),
                   Center(
                     child: Card(
                         shadowColor: Color(0xFF3D00E0),
@@ -356,15 +440,5 @@ class _MakeAppointmentState extends State<MakeAppointment> {
         ),
       ),
     );
-  }
-}
-
-class Region {
-  final int slotid;
-  final String time;
-
-  Region({this.slotid, this.time});
-  factory Region.fromJson(Map<String, dynamic> json) {
-    return new Region(slotid: json['slotid'], time: json['time']);
   }
 }

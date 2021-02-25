@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/secure_storage/storage.dart';
@@ -53,19 +54,19 @@ class APIservice {
     }
   }
 
-  Future<String> getSlotsList() async {
-    var response = await http.get(
-      ngrok + 'api/doctor/slots',
-      headers: {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-      },
-    );
-    if (response.statusCode == 200) {
-      var mapResponse = json.decode(response.body);
-      newSlotMap = mapResponse["data"];
-    }
-  }
+  // Future<String> getSlotsList() async {
+  //   var response = await http.get(
+  //     ngrok + 'api/doctor/slots',
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //       'Accept': 'application/json',
+  //     },
+  //   );
+  //   if (response.statusCode == 200) {
+  //     var mapResponse = json.decode(response.body);
+  //     newSlotMap = mapResponse["data"];
+  //   }
+  // }
 
   Future<String> getServiceTime() async {
     await getData();
@@ -129,21 +130,55 @@ class APIservice {
     }
   }
 
-  Future<String> getEntry() async {
-    for (var i = 0; i < slots.length; i++) {
-      if (slots[i]["slotid"] == int.parse(slotId)) {
-        timee = slots[i]["time"];
+  Future<String> getSlots() async {
+    Map jsonMap = {
+      "doctorid": docId,
+      "date": dateChoosen,
+    };
+    var response = await http.post(
+      ngrok1 + 'slots',
+      body: json.encode(jsonMap),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      var mapResponse = json.decode(response.body);
+      slot = mapResponse;
+      for (var i in slot.entries) {
+        slotnew.add(i.key);
       }
     }
-    print("===========================");
-    print(patientId + nameOfPatient);
+  }
+
+  Future<String> getDates() async {
     Map jsonMap = {
-      "patientid": patientId,
+      "doctorid": docId,
+    };
+    var response = await http.post(
+      ngrok1 + 'dates',
+      body: json.encode(jsonMap),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      var mapResponse = json.decode(response.body);
+      datesList = mapResponse["success"];
+    }
+  }
+
+  Future<String> getEntry() async {
+    Map jsonMap = {
+      "patientid": patientId + ':' + nameOfPatient,
       "slotid": slotId,
       "doctorid": docId,
       "st1": serviceMlTime,
-      "pcit": timee.split('-')[0],
-      "slotend": timee.split('-')[1]
+      "pcit": slotChoosen.split('-')[0],
+      "slotend": slotChoosen.split('-')[1],
+      "date": dateChoosen,
     };
     var response = await http.post(
       ngrok1 + 'consultation',
@@ -156,6 +191,7 @@ class APIservice {
     if (response.statusCode == 200) {
       //
       var mapResponse = json.decode(response.body);
+      print("I am from consul");
       print(mapResponse);
       trueorfalse = mapResponse["success"];
       message = mapResponse["message"];
