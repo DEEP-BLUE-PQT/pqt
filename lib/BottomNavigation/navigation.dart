@@ -1,5 +1,6 @@
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/makeappointment.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/post.dart';
@@ -15,6 +16,7 @@ class Bnavigation extends StatefulWidget {
 }
 
 class _BnavigationState extends State<Bnavigation> {
+  APIservice apIservice = APIservice();
   final editingController = new TextEditingController();
   int selectedIndex = 0;
 
@@ -56,12 +58,14 @@ class _BnavigationState extends State<Bnavigation> {
                 itemCount: doctorList == null ? 0 : doctorList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      docId = doctorList[index]['docid'].toString();
+                      await apIservice.getDates();
                       setState(() {
                         docId = doctorList[index]['docid'].toString();
                         docName = doctorList[index]['docname'];
                         depName = doctorList[index]['depname'];
-                        slots = newSlotMap[docName];
+                        // slots = newSlotMap[docName];
 
                         Navigator.pushNamed(context, MakeAppointment.route);
                         //TODO SLOT KESE KRNA H

@@ -255,6 +255,8 @@ class _MyappointmentState extends State<Myappointment> {
                               subtitle: Text(
                                 depName +
                                     '\n' +
+                                    dateChoosen +
+                                    '\n' +
                                     "Doctor check in time " +
                                     pcit1,
                               ),

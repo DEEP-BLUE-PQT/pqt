@@ -64,9 +64,9 @@ class _MyAppState extends State<MyApp> {
     await apIservice.getDoctorList();
   }
 
-  getSlotsList() async {
-    await apIservice.getSlotsList();
-  }
+  // getSlotsList() async {
+  //   await apIservice.getSlotsList();
+  // }
 
   String check_Contact;
   bool checking = false;
@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     getDocList();
-    getSlotsList();
+    // getSlotsList();
     getScreen();
   }
 
@@ -95,10 +95,8 @@ class _MyAppState extends State<MyApp> {
       body: AnimatedSplashScreen(
           duration: 3000,
           splash: Image.asset(
-            'assets/images/test.jpg',
+            'assets/images/newnew.v1.png',
             colorBlendMode: BlendMode.colorBurn,
-            height: 5000,
-            width: 5000,
           ),
           nextScreen: checking ? Myappointment() : Details(),
           splashTransition: SplashTransition.slideTransition,

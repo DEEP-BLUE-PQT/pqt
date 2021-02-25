@@ -1,5 +1,5 @@
-String ngrok = "https://5bf4c04a6b86.ngrok.io/"; // all other(deepak) // other
-String ngrok1 = 'https://aa9beb885d0b.ngrok.io/'; //book(aak) //consul
+String ngrok = "https://ccd9b2b348f4.ngrok.io/"; // all other(deepak) // other
+String ngrok1 = 'https://c2fd21f8155c.ngrok.io/'; //book(aak) //consul
 String ml = 'https://dsw.pythonanywhere.com/predict';
 String userNameText;
 String userContactText;
@@ -11,7 +11,7 @@ List doctorList;
 String docId;
 String docName;
 String depName;
-Map newSlotMap;
+// Map newSlotMap;
 List slots;
 String age;
 String gender;
@@ -40,4 +40,9 @@ bool dispTorF = false;
 int success = 0;
 int successcons = 1;
 String nameOfPatient;
-//todo use concat!
+List datesList = ['hello'];
+String dateChoosen;
+String slotChoosen;
+
+Map slot;
+List slotnew = [];
