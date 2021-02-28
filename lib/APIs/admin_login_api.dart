@@ -50,6 +50,7 @@ class APIservice {
     );
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
+      print(mapResponse);
       doctorList = mapResponse["data"];
     }
   }
@@ -73,9 +74,8 @@ class APIservice {
 
     Map jsonMap = {
       "age": int.parse(age),
-      "doctor": depName,
-      "disability": "No disability",
-      "gender": gender
+      "doctor": depName.toLowerCase(),
+      "gender": gender.toLowerCase()
     };
 
     var response = await http.post(
@@ -89,7 +89,9 @@ class APIservice {
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
       // newSlotMap = mapResponse["data"];
-      serviceMlTime = mapResponse['prediction'];
+      print("*********************************");
+      print(mapResponse);
+      serviceMlTime = mapResponse['prediction'].toString();
     }
   }
 
@@ -171,14 +173,19 @@ class APIservice {
   }
 
   Future<String> getEntry() async {
+    print("==========");
+    print(serviceMlTime);
     Map jsonMap = {
-      "patientid": patientId + ':' + nameOfPatient,
+      "patientid": patientId + '_' + nameOfPatient,
       "slotid": slotId,
       "doctorid": docId,
       "st1": serviceMlTime,
       "pcit": slotChoosen.split('-')[0],
       "slotend": slotChoosen.split('-')[1],
       "date": dateChoosen,
+      "age": age,
+      "gender": gender,
+      "depname": depName
     };
     var response = await http.post(
       ngrok1 + 'consultation',
