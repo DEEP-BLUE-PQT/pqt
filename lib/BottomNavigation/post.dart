@@ -22,15 +22,29 @@ class _PostState extends State<Post> {
         backgroundColor: Color(0xFF3D00E0),
         title: Text("Post"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '',
+      body: Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              child: Center(child: Text("No post available")),
+              height: 100,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                border: Border.all(color: Colors.white),
+                boxShadow: [
+                  BoxShadow(color: Colors.black12, spreadRadius: 3),
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
