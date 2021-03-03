@@ -398,9 +398,9 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                                         return MyDialog2();
                                       },
                                     );
-                                    if (result) {
-                                      setState(() {});
-                                    }
+                                    // if (result) {
+                                    //   setState(() {});
+                                    // }
                                     // Navigator.pushNamed(
                                     //     context, Myappointment.route);
                                   } else if (trueorfalse == "False") {

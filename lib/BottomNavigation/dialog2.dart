@@ -29,7 +29,7 @@ class _MyDialog2State extends State<MyDialog2> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  Navigator.pushNamed(context, Myappointment.route);
+                  Navigator.pushReplacementNamed(context, Myappointment.route);
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),

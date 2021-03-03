@@ -1,6 +1,6 @@
-String ngrok = "https://865493f8546e.ngrok.io/"; // all other(deepak) // other
-String ngrok1 = 'https://dddb2207a5ef.ngrok.io/'; //book(aak) //consul
-String ml = 'https://dddb2207a5ef.ngrok.io/ml';
+String ngrok = "https://849f146c976d.ngrok.io/"; // node
+String ngrok1 = 'https://cf283dfce143.ngrok.io/'; //flask
+String ml = 'https://cf283dfce143.ngrok.io/ml';
 String userNameText;
 String userContactText;
 String userEmailText;
@@ -43,6 +43,10 @@ String nameOfPatient;
 List datesList = ['hello'];
 String dateChoosen;
 String slotChoosen;
-
 Map slot;
 List slotnew = [];
+List data_post = [];
+List PostData = [];
+bool flag1 = false;
+List dataHistory = [];
+String error;
