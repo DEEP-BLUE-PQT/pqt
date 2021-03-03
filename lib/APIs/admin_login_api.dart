@@ -71,7 +71,6 @@ class APIservice {
 
   Future<String> getServiceTime() async {
     await getData();
-
     Map jsonMap = {
       "age": int.parse(age),
       "doctor": depName.toLowerCase(),
@@ -95,13 +94,41 @@ class APIservice {
     }
   }
 
-  // Future<String> test() async {
-  //   var response = await http.get(ngrok3);
-  //   if (response.statusCode == 200) {
-  //     var mapResponse = json.decode(response.body);
-  //     newWaitingTime = mapResponse["wt1"];
-  //   }
-  // }
+  Future<String> getPosts() async {
+    var response = await http.get(ngrok + 'api/posts/');
+    if (response.statusCode == 200) {
+      var mapResponse = json.decode(response.body);
+      flag1 = true;
+      data_post = mapResponse['data'];
+      for (var i in data_post) {
+        PostData.add(i['post']);
+      }
+    }
+  }
+
+  Future<String> getHistory() async {
+    Map jsonMap = {
+      "pname": nameOfPatient,
+      "pcontact": patientId,
+    };
+    print("=========================");
+    print(userNameText);
+    print(userContactText);
+    var response = await http.post(
+      ngrok1 + 'phistory',
+      body: json.encode(jsonMap),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      var mapResponse = json.decode(response.body);
+      if (mapResponse['success'] == 1) {
+        dataHistory = mapResponse['data'];
+      }
+    }
+  }
   //
   // Future<String> test2() async {
   //   var response = await http.get(ngrok4);
@@ -116,6 +143,7 @@ class APIservice {
       "patientid": patientId,
       "doctorid": docId,
       "slotid": slotId,
+      "date": dateChoosen
     };
     var response = await http.post(
       ngrok1 + 'readcons',
@@ -148,6 +176,7 @@ class APIservice {
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
       slot = mapResponse;
+      slotnew = [];
       for (var i in slot.entries) {
         slotnew.add(i.key);
       }
@@ -212,6 +241,7 @@ class APIservice {
         wt2 = mapResponse["wt2"];
         wt3 = mapResponse["wt3"];
         scheduler = mapResponse["scheduler"];
+        error = mapResponse["error"];
       }
     }
   }

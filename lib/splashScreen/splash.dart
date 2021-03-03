@@ -64,6 +64,10 @@ class _MyAppState extends State<MyApp> {
     await apIservice.getDoctorList();
   }
 
+  getPostList() async {
+    await apIservice.getPosts();
+  }
+
   // getSlotsList() async {
   //   await apIservice.getSlotsList();
   // }
@@ -85,6 +89,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     getDocList();
+    getPostList();
     // getSlotsList();
     getScreen();
   }

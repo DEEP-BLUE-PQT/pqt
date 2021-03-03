@@ -32,6 +32,15 @@ class _MyappointmentState extends State<Myappointment> {
     }
   }
 
+  getHistory() async {
+    await apIservice.getHistory();
+  }
+
+  @override
+  void initState() {
+    getHistory();
+  }
+
   callmyAPI() async {
     await apIservice.readBM();
   }
@@ -218,7 +227,7 @@ class _MyappointmentState extends State<Myappointment> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: Container(),
+        // leading: Container(),
         backgroundColor: Color(0xFF3D00E0),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -230,6 +239,81 @@ class _MyappointmentState extends State<Myappointment> {
           ],
         ),
       ),
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 80,
+              child: DrawerHeader(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Center(
+                      child: Text('Appointment History'),
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.only(top: 0.0),
+                itemCount: dataHistory == null ? 0 : dataHistory.length,
+                itemBuilder: (context, index) {
+                  return Ink(
+                    color: true ? Colors.blueGrey : null,
+                    child: ListTile(
+                      title: Text(dataHistory[index][1],
+                          style: TextStyle(fontWeight: FontWeight.w500)),
+                      subtitle: Text('My City, CA 99984'),
+                      leading: Icon(
+                        Icons.restaurant_menu,
+                        color: Colors.blue[500],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+      // drawer: Drawer(
+      //   child: Expanded(
+      //     child: SingleChildScrollView(
+      //       child: ListView(
+      //         padding: EdgeInsets.zero,
+      //         children: <Widget>[
+      //           Container(
+      //             height: 100,
+      //             child: DrawerHeader(
+      //               child: Text(
+      //                 'Previous and Future records',
+      //                 style: TextStyle(color: Colors.white),
+      //               ),
+      //               decoration: BoxDecoration(
+      //                 color: Color(0xFF3D00E0),
+      //               ),
+      //             ),
+      //           ),
+      //           Container(
+      //               height: double.maxFinite,
+      //               child: ListView.builder(
+      //                   itemCount: data == null ? 0 : data.length,
+      //                   itemBuilder: (BuildContext context, i) {
+      //                     return new ListTile(
+      //                       title: Text(data[i]),
+      //                     );
+      //                   }))
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
       body: flag
           ? ExpandableTheme(
               data: const ExpandableThemeData(
@@ -302,7 +386,12 @@ class _MyappointmentState extends State<Myappointment> {
                                           subtitle:
                                               Text('check-in-time : ' + pcit1),
                                           trailing: Text(
-                                            displayTime.toString(),
+                                            displayTime.toString() +
+                                                "  " +
+                                                "+/- " +
+                                                error +
+                                                ' ' +
+                                                'mins',
                                           ),
                                         ),
                                         Divider(
@@ -314,7 +403,12 @@ class _MyappointmentState extends State<Myappointment> {
                                           subtitle:
                                               Text('check-in-time : ' + pcit2),
                                           trailing: Text(
-                                            wt2.toString(),
+                                            wt2.toString() +
+                                                "  " +
+                                                "+/- " +
+                                                "3" +
+                                                ' ' +
+                                                'mins',
                                           ),
                                         ),
                                         Divider(
@@ -326,7 +420,12 @@ class _MyappointmentState extends State<Myappointment> {
                                           subtitle:
                                               Text('check-in-time : ' + pcit3),
                                           trailing: Text(
-                                            wt3.toString(),
+                                            wt3.toString() +
+                                                "  " +
+                                                "+/- " +
+                                                "5" +
+                                                ' ' +
+                                                'mins',
                                           ),
                                         ),
                                       ],
