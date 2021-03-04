@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
+import 'package:flutter_app_pqt_splash/sqlite/sqllite2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
@@ -11,6 +12,22 @@ class MyDialog2 extends StatefulWidget {
 }
 
 class _MyDialog2State extends State<MyDialog2> {
+  db DB = db(
+      depName: depName,
+      docName: docName,
+      starttime: slotChoosen.split('-')[0],
+      endtime: slotChoosen.split('-')[1],
+      dateChoosen: dateChoosen,
+      name: nameOfPatient);
+  getDBDone() async {
+    await DB.Create();
+  }
+
+  @override
+  void initState() {
+    getDBDone();
+  }
+
   Widget build(BuildContext context) {
     return AlertDialog(
       content: Container(

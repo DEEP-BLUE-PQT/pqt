@@ -1,6 +1,6 @@
-String ngrok = "https://849f146c976d.ngrok.io/"; // node
-String ngrok1 = 'https://cf283dfce143.ngrok.io/'; //flask
-String ml = 'https://cf283dfce143.ngrok.io/ml';
+String ngrok = "https://c2c06d66bc0f.ngrok.io/"; // node
+String ngrok1 = 'https://88eb928030c0.ngrok.io/'; //flask
+String ml = 'https://88eb928030c0.ngrok.io/ml';
 String userNameText;
 String userContactText;
 String userEmailText;
@@ -50,3 +50,4 @@ List PostData = [];
 bool flag1 = false;
 List dataHistory = [];
 String error;
+List history = [];
