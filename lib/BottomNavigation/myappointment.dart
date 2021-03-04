@@ -250,29 +250,45 @@ class _MyappointmentState extends State<Myappointment> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Center(
-                      child: Text('Appointment History'),
+                      child: Text(
+                        'Appointment History',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
                     ),
                   ],
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Color(0xFF3D00E0),
                 ),
               ),
             ),
             Expanded(
+              //name --> leading
+              //doctor --> title
+              //subtitle --> depname +'\n' + slot time
+              //trailing --> date
+
               child: ListView.builder(
                 padding: EdgeInsets.only(top: 0.0),
-                itemCount: dataHistory == null ? 0 : dataHistory.length,
+                itemCount: history == null ? 0 : history.length,
                 itemBuilder: (context, index) {
                   return Ink(
-                    color: true ? Colors.blueGrey : null,
+                    color: true ? Colors.white : null,
                     child: ListTile(
-                      title: Text(dataHistory[index][1],
-                          style: TextStyle(fontWeight: FontWeight.w500)),
-                      subtitle: Text('My City, CA 99984'),
-                      leading: Icon(
-                        Icons.restaurant_menu,
-                        color: Colors.blue[500],
+                      title: Text(
+                        history[index]["docName"],
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      subtitle: Text(history[index]["depName"] +
+                          " " +
+                          history[index]["starttime"] +
+                          "-" +
+                          history[index]["endtime"]),
+                      leading: Text(
+                        history[index]["name"],
+                      ),
+                      trailing: Text(
+                        history[index]["dateChoosen"],
                       ),
                     ),
                   );
