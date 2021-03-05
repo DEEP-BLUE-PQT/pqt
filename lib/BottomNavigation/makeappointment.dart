@@ -63,6 +63,18 @@ class _MakeAppointmentState extends State<MakeAppointment> {
     ).show();
   }
 
+  _onBasicAlertPressed12(context) {
+    Alert(
+      style: AlertStyle(
+        isButtonVisible: false,
+        isCloseButton: true,
+        backgroundColor: Colors.white,
+      ),
+      context: context,
+      title: "Some error occurred, Please call hospital help desk ",
+    ).show();
+  }
+
   String selectedRegion;
 
   int _value = null;
@@ -390,6 +402,10 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                                   APIservice apIservice = APIservice();
                                   await apIservice.getServiceTime();
                                   await apIservice.getEntry();
+                                  if (fail == true) {
+                                    _onBasicAlertPressed12(context);
+                                    fail = false;
+                                  }
                                   if (trueorfalse == "True") {
                                     //todo see alert
                                     dispTorF = true;
