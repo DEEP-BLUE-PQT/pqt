@@ -59,6 +59,8 @@ class _BnavigationState extends State<Bnavigation> {
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
                     onTap: () async {
+                      dateChoosen = null;
+                      slotChoosen = null;
                       docId = doctorList[index]['docid'].toString();
                       await apIservice.getDates();
                       setState(() {
@@ -75,50 +77,73 @@ class _BnavigationState extends State<Bnavigation> {
                         //  );
                       });
                     },
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.person,
-                          color: Colors.grey,
-                          size: 40.0,
+                    child: ListTile(
+                      title: Text(
+                        doctorList[index]["docname"].toString().toUpperCase(),
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 17.0,
                         ),
-                        SizedBox(
-                          width: 10.0,
+                      ),
+                      subtitle: Text(
+                        doctorList[index]["depname"].toString().toUpperCase(),
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 12.0,
                         ),
-                        Center(
-                          child: Container(
-                            height: 80.0,
-                            child: Center(
-                              child: Row(
-                                children: [
-                                  Text(
-                                    doctorList[index]["docname"]
-                                        .toString()
-                                        .toUpperCase(),
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                      fontSize: 19.0,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10.0,
-                                  ),
-                                  Text(
-                                    doctorList[index]["depname"]
-                                        .toString()
-                                        .toUpperCase(),
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                      fontSize: 12.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
+                      leading: Icon(
+                        Icons.person,
+                        color: Colors.grey,
+                        size: 40.0,
+                      ),
                     ),
+
+                    // child: Row(
+                    //   children: [
+                    //     Icon(
+                    //       Icons.person,
+                    //       color: Colors.grey,
+                    //       size: 40.0,
+                    //     ),
+                    //     SizedBox(
+                    //       width: 10.0,
+                    //     ),
+                    //     Center(
+                    //       child: Container(
+                    //         height: 80.0,
+                    //         child: Center(
+                    //           child: Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: [
+                    //               Text(
+                    //                 doctorList[index]["docname"]
+                    //                     .toString()
+                    //                     .toUpperCase(),
+                    //                 style: TextStyle(
+                    //                   color: Colors.blue,
+                    //                   fontSize: 19.0,
+                    //                 ),
+                    //               ),
+                    //               SizedBox(
+                    //                 width: 10.0,
+                    //               ),
+                    //               Text(
+                    //                 doctorList[index]["depname"]
+                    //                     .toString()
+                    //                     .toUpperCase(),
+                    //                 style: TextStyle(
+                    //                   color: Colors.blue,
+                    //                   fontSize: 12.0,
+                    //                 ),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   );
                 },
               ),

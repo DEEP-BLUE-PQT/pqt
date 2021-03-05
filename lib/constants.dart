@@ -1,6 +1,6 @@
-String ngrok = "https://c2c06d66bc0f.ngrok.io/"; // node
-String ngrok1 = 'https://88eb928030c0.ngrok.io/'; //flask
-String ml = 'https://88eb928030c0.ngrok.io/ml';
+String ngrok = "https://52a2d9a3cc9f.ngrok.io/"; // node
+String ngrok1 = 'https://e9ce954a10d0.ngrok.io/'; //flask
+String ml = 'https://e9ce954a10d0.ngrok.io/ml';
 String userNameText;
 String userContactText;
 String userEmailText;
@@ -42,6 +42,7 @@ int successcons = 1;
 String nameOfPatient;
 List datesList = ['hello'];
 String dateChoosen;
+bool fail = false;
 String slotChoosen;
 Map slot;
 List slotnew = [];

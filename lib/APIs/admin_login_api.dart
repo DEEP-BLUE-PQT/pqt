@@ -42,7 +42,7 @@ class APIservice {
 
   Future<String> getDoctorList() async {
     var response = await http.get(
-      ngrok + 'api/doctor/',
+      ngrok + 'api/doctor/all',
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -177,9 +177,12 @@ class APIservice {
       var mapResponse = json.decode(response.body);
       slot = mapResponse;
       slotnew = [];
+      slotChoosen = null;
+      print(slotnew);
       for (var i in slot.entries) {
         slotnew.add(i.key);
       }
+      print(slotnew);
     }
   }
 
@@ -227,6 +230,9 @@ class APIservice {
     if (response.statusCode == 200) {
       //
       var mapResponse = json.decode(response.body);
+      if (mapResponse['code'] == -1) {
+        fail = true;
+      }
       print("I am from consul");
       print(mapResponse);
       trueorfalse = mapResponse["success"];
