@@ -24,16 +24,6 @@ class _BnavigationState extends State<Bnavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add_call),
-            color: 1 == 1 ? Colors.white : Colors.white54,
-            onPressed: () {
-              launch("tel://21213123123");
-            },
-            iconSize: 35,
-          ),
-        ],
         centerTitle: true,
         leading: Container(),
         backgroundColor: Color(0xFF3D00E0),
