@@ -42,7 +42,7 @@ class APIservice {
 
   Future<String> getDoctorList() async {
     var response = await http.get(
-      ngrok + 'api/doctor/all',
+      ngrok + 'api/doctor/',
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -157,6 +157,9 @@ class APIservice {
       var mapResponse = json.decode(response.body);
       newWaitingTime = mapResponse["wt1"];
       successcons = mapResponse["success"];
+      pcotDisplay = mapResponse['pcot'];
+      pcit2 = mapResponse['pcit2'];
+      pcit3 = mapResponse['pcit3'];
     }
   }
 
@@ -248,6 +251,7 @@ class APIservice {
         wt3 = mapResponse["wt3"];
         scheduler = mapResponse["scheduler"];
         error = mapResponse["error"];
+        pcotDisplay = mapResponse['pcot'];
       }
     }
   }

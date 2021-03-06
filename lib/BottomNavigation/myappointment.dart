@@ -12,6 +12,7 @@ import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/post.dart';
 import 'package:flutter_app_pqt_splash/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'navigation.dart';
 
@@ -70,6 +71,9 @@ class _MyappointmentState extends State<Myappointment> {
 
           setState(
             () {
+              pcotDisplay;
+              pcit2;
+              pcit3;
               newWaitingTime;
               difference = newWaitingTime - oldWaitingTime;
               print("I am old Time before update " + oldWaitingTime.toString());
@@ -226,6 +230,16 @@ class _MyappointmentState extends State<Myappointment> {
     }
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add_call),
+            color: 1 == 1 ? Colors.white : Colors.white54,
+            onPressed: () {
+              launch("tel://21213123123");
+            },
+            iconSize: 35,
+          ),
+        ],
         centerTitle: true,
         // leading: Container(),
         backgroundColor: Color(0xFF3D00E0),
@@ -433,8 +447,12 @@ class _MyappointmentState extends State<Myappointment> {
                                         ),
                                         ListTile(
                                           title: Text('Medicine Queue'),
-                                          subtitle:
-                                              Text('check-in-time : ' + pcit3),
+                                          subtitle: Text('check-in-time : ' +
+                                              pcit3 +
+                                              '\n' +
+                                              '\n' +
+                                              'check-out-time :' +
+                                              pcotDisplay),
                                           trailing: Text(
                                             wt3.toString() +
                                                 "  " +

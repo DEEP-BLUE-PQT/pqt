@@ -1,6 +1,6 @@
-String ngrok = "https://52a2d9a3cc9f.ngrok.io/"; // node
-String ngrok1 = 'https://e9ce954a10d0.ngrok.io/'; //flask
-String ml = 'https://e9ce954a10d0.ngrok.io/ml';
+String ngrok = "https://f51ebb32abd7.ngrok.io/"; // node
+String ngrok1 = 'https://4cde73090691.ngrok.io/'; //flask
+String ml = 'https://4cde73090691.ngrok.io/ml';
 String userNameText;
 String userContactText;
 String userEmailText;
@@ -52,3 +52,4 @@ bool flag1 = false;
 List dataHistory = [];
 String error;
 List history = [];
+String pcotDisplay;
