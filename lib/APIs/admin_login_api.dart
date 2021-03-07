@@ -155,6 +155,8 @@ class APIservice {
     );
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
+      print("READCONS");
+      print(mapResponse);
       newWaitingTime = mapResponse["wt1"];
       successcons = mapResponse["success"];
       pcotDisplay = mapResponse['pcot'];
@@ -258,7 +260,7 @@ class APIservice {
 
   Future<String> readBM() async {
     Map jsonMap = {
-      "patientid": patientId,
+      "patientid": patientId + '_' + nameOfPatient,
     };
     var response = await http.post(
       ngrok1 + 'readbm',
@@ -268,16 +270,21 @@ class APIservice {
         'Accept': 'application/json',
       },
     );
+    print("#####################################################");
+
+    print(response.statusCode);
+
     if (response.statusCode == 200) {
       //
       var mapResponse = json.decode(response.body);
+      print("READBM");
+      print(mapResponse);
       success = mapResponse['success'];
       if (success == 1) {
         pcit2 = mapResponse["pcit2"];
         pcit3 = mapResponse["pcit3"];
         wt2 = mapResponse["wt2"];
         wt3 = mapResponse["wt3"];
-        print(mapResponse);
       }
     }
   }

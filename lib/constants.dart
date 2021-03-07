@@ -53,3 +53,4 @@ List dataHistory = [];
 String error;
 List history = [];
 String pcotDisplay;
+bool flagofState = true;
