@@ -1,6 +1,6 @@
-String ngrok = "https://f51ebb32abd7.ngrok.io/"; // node
-String ngrok1 = 'https://4cde73090691.ngrok.io/'; //flask
-String ml = 'https://4cde73090691.ngrok.io/ml';
+String ngrok = "http://13.126.228.6:3000/"; // node
+String ngrok1 = 'http://13.233.119.130:5005/'; //flask
+String ml = 'http://13.233.119.130:5005/ml';
 String userNameText;
 String userContactText;
 String userEmailText;
