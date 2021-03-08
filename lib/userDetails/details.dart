@@ -142,7 +142,7 @@ class _DetailsState extends State<Details> {
                           controller: userGender,
                           decoration: InputDecoration(
                               hintText:
-                                  "Enter M for Male , F for Female , O for Others",
+                                  "Enter m for Male , f for Female , o for Others",
                               icon: Icon(Icons.add)),
                         ),
                       ),

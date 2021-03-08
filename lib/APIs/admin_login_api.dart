@@ -157,11 +157,14 @@ class APIservice {
       var mapResponse = json.decode(response.body);
       print("READCONS");
       print(mapResponse);
-      newWaitingTime = mapResponse["wt1"];
-      successcons = mapResponse["success"];
-      pcotDisplay = mapResponse['pcot'];
-      pcit2 = mapResponse['pcit2'];
-      pcit3 = mapResponse['pcit3'];
+      if (mapResponse['success'] == 1) {
+        newWaitingTime = mapResponse["wt1"];
+        successcons = mapResponse["success"];
+        pcotDisplay = mapResponse['pcot'];
+        //total checkout time
+        pcit2 = mapResponse['pcit2'];
+        pcit3 = mapResponse['pcit3'];
+      }
     }
   }
 
@@ -254,6 +257,7 @@ class APIservice {
         scheduler = mapResponse["scheduler"];
         error = mapResponse["error"];
         pcotDisplay = mapResponse['pcot'];
+        //total
       }
     }
   }
@@ -285,6 +289,7 @@ class APIservice {
         pcit3 = mapResponse["pcit3"];
         wt2 = mapResponse["wt2"];
         wt3 = mapResponse["wt3"];
+        pcotDisplay = mapResponse['pcot3'];
       }
     }
   }
