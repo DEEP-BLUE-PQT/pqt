@@ -155,11 +155,16 @@ class APIservice {
     );
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
-      newWaitingTime = mapResponse["wt1"];
-      successcons = mapResponse["success"];
-      pcotDisplay = mapResponse['pcot'];
-      pcit2 = mapResponse['pcit2'];
-      pcit3 = mapResponse['pcit3'];
+      print("READCONS");
+      print(mapResponse);
+      if (mapResponse['success'] == 1) {
+        newWaitingTime = mapResponse["wt1"];
+        successcons = mapResponse["success"];
+        pcotDisplay = mapResponse['pcot'];
+        //total checkout time
+        pcit2 = mapResponse['pcit2'];
+        pcit3 = mapResponse['pcit3'];
+      }
     }
   }
 
@@ -252,13 +257,14 @@ class APIservice {
         scheduler = mapResponse["scheduler"];
         error = mapResponse["error"];
         pcotDisplay = mapResponse['pcot'];
+        //total
       }
     }
   }
 
   Future<String> readBM() async {
     Map jsonMap = {
-      "patientid": patientId,
+      "patientid": patientId + '_' + nameOfPatient,
     };
     var response = await http.post(
       ngrok1 + 'readbm',
@@ -268,16 +274,22 @@ class APIservice {
         'Accept': 'application/json',
       },
     );
+    print("#####################################################");
+
+    print(response.statusCode);
+
     if (response.statusCode == 200) {
       //
       var mapResponse = json.decode(response.body);
+      print("READBM");
+      print(mapResponse);
       success = mapResponse['success'];
       if (success == 1) {
         pcit2 = mapResponse["pcit2"];
         pcit3 = mapResponse["pcit3"];
         wt2 = mapResponse["wt2"];
         wt3 = mapResponse["wt3"];
-        print(mapResponse);
+        pcotDisplay = mapResponse['pcot3'];
       }
     }
   }

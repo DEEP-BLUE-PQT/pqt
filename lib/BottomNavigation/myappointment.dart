@@ -14,6 +14,7 @@ import 'package:flutter_app_pqt_splash/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'dialog3.dart';
 import 'navigation.dart';
 
 class Myappointment extends StatefulWidget {
@@ -46,6 +47,15 @@ class _MyappointmentState extends State<Myappointment> {
     await apIservice.readBM();
   }
 
+  callcallcallmyDialog() async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (_) {
+        return MyDialog3();
+      },
+    );
+  }
+
   Timer _timer1;
   Timer _timer2;
   Timer _timer3;
@@ -59,40 +69,47 @@ class _MyappointmentState extends State<Myappointment> {
       _timer1 = null;
     } else {
       _timer1 = new Timer.periodic(
-        const Duration(minutes: 2), // 5 mins instead of 3s
+        const Duration(minutes: 1), // 5 mins instead of 3s
         (Timer timer1) async {
           if (successcons == 1) {
             await apIservice.read();
-            if (successcons == 0) {
+
+            if (successcons == 1) {
+              setState(() {
+                pcit2;
+                pcit3;
+                pcotDisplay;
+              });
               timer1.cancel();
               startTimer5();
+              flagofState = false;
             }
           }
-
-          setState(
-            () {
-              pcotDisplay;
-              pcit2;
-              pcit3;
-              newWaitingTime;
-              difference = newWaitingTime - oldWaitingTime;
-              print("I am old Time before update " + oldWaitingTime.toString());
-              oldWaitingTime = newWaitingTime;
-              displayTime = displayTime + difference;
-              if (check(displayTime)) {
-                print("I am new waiting time API " + newWaitingTime.toString());
-                print("I am diff " + difference.toString());
+          if (flagofState) {
+            setState(
+              () {
+                newWaitingTime;
+                difference = newWaitingTime - oldWaitingTime;
                 print(
-                    "I am old Time After update " + oldWaitingTime.toString());
-                print("I am display Time  " + displayTime.toString());
-              } else {
-                print("I am done here timer 1");
-                timer1.cancel();
+                    "I am old Time before update " + oldWaitingTime.toString());
+                oldWaitingTime = newWaitingTime;
+                displayTime = displayTime + difference;
+                if (check(displayTime)) {
+                  print(
+                      "I am new waiting time API " + newWaitingTime.toString());
+                  print("I am diff " + difference.toString());
+                  print("I am old Time After update " +
+                      oldWaitingTime.toString());
+                  print("I am display Time  " + displayTime.toString());
+                } else {
+                  print("I am done here timer 1");
+                  timer1.cancel();
 
-                startTimer5();
-              }
-            },
-          );
+                  startTimer5();
+                }
+              },
+            );
+          }
         },
       );
     }
@@ -100,15 +117,25 @@ class _MyappointmentState extends State<Myappointment> {
 
   void startTimer5() {
     print("I starttimer 5 was called");
+    print("1");
     if (_timer5 != null) {
       _timer5.cancel();
       _timer5 = null;
     } else {
+      print("2");
       _timer5 = new Timer.periodic(
         const Duration(minutes: 1), // 5 mins instead of 3s
         (Timer timer5) async {
+          print("3");
+
           await apIservice.readBM();
+
           if (success == 1) {
+            setState(() {
+              pcit2;
+              pcit3;
+              pcotDisplay;
+            });
             timer5.cancel();
 
             startTimer3();
@@ -161,6 +188,9 @@ class _MyappointmentState extends State<Myappointment> {
                 print("I am done here timer 3");
                 //old_waiting<0
                 timer3.cancel();
+                print("filal ke liye 20 sec");
+                //needs to be 4 minutes
+
                 sleep(
                   Duration(minutes: 4),
                 );
@@ -185,16 +215,23 @@ class _MyappointmentState extends State<Myappointment> {
     } else {
       _timer4 = new Timer.periodic(
         const Duration(minutes: 1), // 1 min
-        (Timer timer3) {
+        (Timer timer4) {
           setState(
             () {
               if (wt3 < 1) {
-                print("I am done here timer 4");
+                print("I am done here timer 3");
                 //old_waiting<0
-                timer3.cancel();
+                timer4.cancel();
+                print("filal ke liye 20 sec");
+                //needs to be 6 minutes
+                sleep(
+                  Duration(minutes: 6),
+                );
+                flag = false;
+                callcallcallmyDialog();
               } else {
                 wt3 = wt3 - 1;
-                print("I am GENERAL wt3 " + wt3.toString());
+                print("I am GENERAL wt2 " + wt3.toString());
                 //set state (old_waiting= old_waiting - 1)
               }
             },
@@ -203,6 +240,43 @@ class _MyappointmentState extends State<Myappointment> {
       );
     }
   }
+
+  // void startTimer4() {
+  //   print("I am startTimer 4");
+  //   if (_timer4 != null) {
+  //     _timer4.cancel();
+  //     _timer4 = null;
+  //   } else {
+  //     print("4_1");
+  //     _timer4 = new Timer.periodic(
+  //       const Duration(minutes: 1), // 1 min
+  //       (Timer timer4) {
+  //         setState(
+  //           () {
+  //             print("4_2");
+  //             if (wt3 < 1) {
+  //               print("4_3");
+  //               print("I am done here timer 4");
+  //               //old_waiting<0
+  //               timer4.cancel();
+  //               print("filal ke liye 20 sec");
+  //               //needs to be 4 minutes
+  //
+  //               sleep(
+  //                 Duration(seconds: 20),
+  //               );
+  //             } else {
+  //               print("4_4");
+  //               wt3 = wt3 - 1;
+  //               print("I am GENERAL wt3 " + wt3.toString());
+  //               //set state (old_waiting= old_waiting - 1)
+  //             }
+  //           },
+  //         );
+  //       },
+  //     );
+  //   }
+  // }
 
   void Display_wt1() {
     print("I cron was called");
