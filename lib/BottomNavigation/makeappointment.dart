@@ -71,7 +71,7 @@ class _MakeAppointmentState extends State<MakeAppointment> {
         backgroundColor: Colors.white,
       ),
       context: context,
-      title: "Some error occurred, Please call hospital help desk ",
+      title: "Sorry Appointment could not be booked!",
     ).show();
   }
 
