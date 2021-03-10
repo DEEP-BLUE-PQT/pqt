@@ -34,6 +34,10 @@ class _MyappointmentState extends State<Myappointment> {
     }
   }
 
+  void launchURL(_url) async => await canLaunch(_url)
+      ? await launch(_url, forceWebView: true, forceSafariVC: false)
+      : throw 'Could not launch $_url';
+
   getHistory() async {
     await apIservice.getHistory();
   }
@@ -309,7 +313,17 @@ class _MyappointmentState extends State<Myappointment> {
             icon: Icon(Icons.add_call),
             color: 1 == 1 ? Colors.white : Colors.white54,
             onPressed: () {
-              launch("tel://21213123123");
+              launch("tel://+919004958891");
+            },
+            iconSize: 35,
+          ),
+          IconButton(
+            icon: Icon(Icons.app_blocking_rounded),
+            color: 1 == 1 ? Colors.white : Colors.white54,
+            onPressed: () {
+              // ignore: unnecessary_statements
+              launchURL('https://clever-mcclintock-4601aa.netlify.app');
+              print("here");
             },
             iconSize: 35,
           ),
