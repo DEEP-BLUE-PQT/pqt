@@ -78,7 +78,7 @@ class _MyappointmentState extends State<Myappointment> {
           if (successcons == 1) {
             await apIservice.read();
 
-            if (successcons == 1) {
+            if (successcons == 0) {
               setState(() {
                 pcit2;
                 pcit3;
