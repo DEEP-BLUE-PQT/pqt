@@ -140,7 +140,7 @@ class APIservice {
 
   Future<String> read() async {
     Map jsonMap = {
-      "patientid": patientId,
+      "patientid": patientId + '_' + nameOfPatient,
       "doctorid": docId,
       "slotid": slotId,
       "date": dateChoosen
@@ -164,6 +164,7 @@ class APIservice {
         //total checkout time
         pcit2 = mapResponse['pcit2'];
         pcit3 = mapResponse['pcit3'];
+        flagofState = true;
       }
     }
   }
