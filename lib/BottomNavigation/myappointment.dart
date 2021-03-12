@@ -38,6 +38,19 @@ class _MyappointmentState extends State<Myappointment> {
       ? await launch(_url, forceWebView: true, forceSafariVC: false)
       : throw 'Could not launch $_url';
 
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        headers: <String, String>{'header_key': 'header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   getHistory() async {
     await apIservice.getHistory();
   }
@@ -196,7 +209,7 @@ class _MyappointmentState extends State<Myappointment> {
                 //needs to be 4 minutes
 
                 sleep(
-                  Duration(minutes: 4),
+                  Duration(minutes: 1),
                 );
                 startTimer4();
               } else {
@@ -229,7 +242,7 @@ class _MyappointmentState extends State<Myappointment> {
                 print("filal ke liye 20 sec");
                 //needs to be 6 minutes
                 sleep(
-                  Duration(minutes: 6),
+                  Duration(minutes: 1),
                 );
                 flag = false;
                 callcallcallmyDialog();
@@ -320,9 +333,10 @@ class _MyappointmentState extends State<Myappointment> {
           IconButton(
             icon: Icon(Icons.app_blocking_rounded),
             color: 1 == 1 ? Colors.white : Colors.white54,
-            onPressed: () {
+            onPressed: () async {
               // ignore: unnecessary_statements
-              launchURL('https://clever-mcclintock-4601aa.netlify.app');
+              await _launchInBrowser(
+                  'https://clever-mcclintock-4601aa.netlify.app');
               print("here");
             },
             iconSize: 35,
