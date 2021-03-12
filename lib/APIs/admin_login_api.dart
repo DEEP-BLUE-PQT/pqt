@@ -246,6 +246,12 @@ class APIservice {
       print(mapResponse);
       trueorfalse = mapResponse["success"];
       message = mapResponse["message"];
+      if (message == 'Sorry, appointment could not be booked') {
+        message = 'Sorry, appointment could not be booked .. invalid slot';
+      }
+      if (message == 'Sorry, appointment could not be booked...slot is full') {
+        message = message;
+      }
       if (trueorfalse == 'True') {
         pcit1 = mapResponse["pcit1"];
         print(pcit1);
