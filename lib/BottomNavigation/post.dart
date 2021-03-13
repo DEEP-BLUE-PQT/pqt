@@ -1,5 +1,6 @@
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
 import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,6 +14,18 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
+  APIservice apIservice = APIservice();
+
+  getPostList() async {
+    await apIservice.getPosts();
+  }
+
+  @override
+  void initState() {
+    getPostList();
+    // getSlotsList();
+  }
+
   int selectedIndex = 2;
 
   @override
