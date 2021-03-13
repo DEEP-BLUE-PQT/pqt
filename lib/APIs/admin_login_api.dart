@@ -99,6 +99,7 @@ class APIservice {
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
       flag1 = true;
+      PostData = [];
       data_post = mapResponse['data'];
       for (var i in data_post) {
         PostData.add(i['post']);
@@ -247,7 +248,8 @@ class APIservice {
       trueorfalse = mapResponse["success"];
       message = mapResponse["message"];
       if (message == 'Sorry, appointment could not be booked') {
-        message = 'Sorry, appointment could not be booked .. invalid slot';
+        message =
+            'You have selected $slotChoosen which is a past slot, Please select another slot';
       }
       if (message == 'Sorry, appointment could not be booked...slot is full') {
         message = message;

@@ -20,6 +20,15 @@ class _BnavigationState extends State<Bnavigation> {
   final editingController = new TextEditingController();
   int selectedIndex = 0;
 
+  getDocList() async {
+    await apIservice.getDoctorList();
+  }
+
+  @override
+  void initState() {
+    getDocList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
