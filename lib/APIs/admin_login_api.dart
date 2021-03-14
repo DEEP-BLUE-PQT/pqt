@@ -226,7 +226,7 @@ class APIservice {
       "slotend": slotChoosen.split('-')[1],
       "date": dateChoosen,
       "age": age,
-      "gender": gender,
+      "gender": gender.toLowerCase(),
       "depname": depName
     };
     var response = await http.post(
