@@ -100,7 +100,7 @@ class _MyAppState extends State<MyApp> {
       body: AnimatedSplashScreen(
           duration: 3000,
           splash: Image.asset(
-            'assets/images/newnew.v1.png',
+            'assets/images/Aasaan-Logo-PQT12-Team.png',
             colorBlendMode: BlendMode.colorBurn,
           ),
           nextScreen: checking ? Myappointment() : Details(),
