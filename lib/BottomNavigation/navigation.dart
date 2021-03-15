@@ -7,6 +7,7 @@ import 'package:flutter_app_pqt_splash/BottomNavigation/post.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
+import 'appointmentHistory.dart';
 import 'makeappointment2follower.dart';
 
 class Bnavigation extends StatefulWidget {
@@ -170,26 +171,12 @@ class _BnavigationState extends State<Bnavigation> {
               Navigator.pushNamed(context, Myappointment.route);
             } else if (selectedIndex == 2) {
               Navigator.pushNamed(context, Post.route);
+            } else if (selectedIndex == 3) {
+              Navigator.pushNamed(context, AppointmentHistory.route);
             }
           });
         },
-        items: [
-          FFNavigationBarItem(
-            iconData: Icons.add,
-            label: 'Book Appointment',
-            selectedBackgroundColor: Color(0xFF3D00E0),
-          ),
-          FFNavigationBarItem(
-            iconData: Icons.list,
-            label: 'My Appointment',
-            selectedBackgroundColor: Color(0xFF3D00E0),
-          ),
-          FFNavigationBarItem(
-            iconData: Icons.add_a_photo_rounded,
-            label: 'Post',
-            selectedBackgroundColor: Color(0xFF3D00E0),
-          ),
-        ],
+        items: items,
       ),
     );
   }

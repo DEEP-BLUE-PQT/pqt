@@ -1,3 +1,6 @@
+import 'package:ff_navigation_bar/ff_navigation_bar_item.dart';
+import 'package:flutter/material.dart';
+
 String ngrok = "http://13.126.228.6:3000/"; // node
 String ngrok1 = 'http://13.233.119.130:5005/'; //flask
 String ml = 'http://13.233.119.130:5005/ml';
@@ -54,3 +57,25 @@ String error;
 List history = [];
 String pcotDisplay;
 bool flagofState = false;
+List<FFNavigationBarItem> items = [
+  FFNavigationBarItem(
+    iconData: Icons.add,
+    label: 'Book' + '\n' + 'Appointment',
+    selectedBackgroundColor: Color(0xFF3D00E0),
+  ),
+  FFNavigationBarItem(
+    iconData: Icons.list,
+    label: 'My' + '\n' + 'Appointment',
+    selectedBackgroundColor: Color(0xFF3D00E0),
+  ),
+  FFNavigationBarItem(
+    iconData: Icons.add_a_photo_rounded,
+    label: 'Post',
+    selectedBackgroundColor: Color(0xFF3D00E0),
+  ),
+  FFNavigationBarItem(
+    iconData: Icons.assignment_ind,
+    label: 'Appointment' + '\n' + 'History',
+    selectedBackgroundColor: Color(0xFF3D00E0),
+  ),
+];

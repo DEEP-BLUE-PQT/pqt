@@ -46,6 +46,10 @@ dependencies:
   dropdown_search: ^0.4.9
   sqflite: any
   path: any
+  search_page: ^1.4.0+1
+  flutter_search_bar: ^2.1.0
+  flappy_search_bar: ^1.7.2
+  connectivity: any
 
 
 

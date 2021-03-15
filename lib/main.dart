@@ -3,6 +3,7 @@ import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
 import 'package:flutter_app_pqt_splash/splashScreen/splash.dart';
 import 'package:flutter_app_pqt_splash/userDetails/details.dart';
 import 'package:flutter_app_pqt_splash/userDetails/details2.dart';
+import 'BottomNavigation/appointmentHistory.dart';
 import 'BottomNavigation/makeappointment2follower.dart';
 import 'BottomNavigation/navigation.dart';
 import 'BottomNavigation/post.dart';
@@ -21,6 +22,7 @@ void main() {
         Post.route: (context) => Post(),
         MakeAppointment.route: (context) => MakeAppointment(),
         MakeAppt.route: (context) => MakeAppt(),
+        AppointmentHistory.route: (context) => AppointmentHistory(),
       },
     ),
   );

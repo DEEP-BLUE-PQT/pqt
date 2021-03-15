@@ -25,7 +25,7 @@ class db {
         onCreate: (Database db, int version) async {
       // When creating the db, create the table
       await db.execute(
-          'CREATE TABLE IF NOT EXISTS dogs (name varchar(11), depName varchar(50), docName varchar(11), starttime varchar(11), endtime varchar(11), dateChoosen varchar(11) )');
+          'CREATE TABLE IF NOT EXISTS dogs (name varchar(11), depName varchar(50), docName varchar(11), starttime varchar(11), endtime varchar(11), dateChoosen varchar(11), pcit1 varchar(11), pcit2 varchar(11),pcit3 varchar(11),oldWaitingTime int , displayTime int , wt2 int , wt3 int , scheduler varchar(11) , error varchar(11), pcotDisplay varchar(11) )');
     });
 
     await database.transaction((txn) async {
