@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_pqt_splash/APIs/admin_login_api.dart';
@@ -92,10 +93,42 @@ class _BnavigationState extends State<Bnavigation> {
                           fontSize: 12.0,
                         ),
                       ),
-                      leading: Icon(
-                        Icons.person,
-                        color: Colors.grey,
-                        size: 40.0,
+                      // leading: Column(
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: <Widget>[
+                      //     new Container(
+                      //       width: 50.0,
+                      //       height: 50.0,
+                      //       decoration: new BoxDecoration(
+                      //         shape: BoxShape.circle,
+                      //         image: new DecorationImage(
+                      //           fit: BoxFit.fill,
+                      //           image: new NetworkImage(
+                      //               "http://13.126.228.6:3000/images/1parasjain.jpg"),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      leading: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  'http://13.126.228.6:3000/images/1parasjain.jpg',
+                              placeholder: (context, url) => Container(
+                                child: CircularProgressIndicator(),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
 

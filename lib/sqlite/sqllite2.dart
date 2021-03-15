@@ -9,14 +9,34 @@ class db {
   final String endtime;
   final String dateChoosen;
   final String name;
-  db({
-    this.depName,
-    this.docName,
-    this.starttime,
-    this.endtime,
-    this.dateChoosen,
-    this.name,
-  });
+  final String pcit1;
+  final String pcit2;
+  final String pcit3;
+  final int oldWaitingTime;
+  final int displayTime;
+  final int wt2;
+  final int wt3;
+  final String scheduler;
+  final String error;
+  final String pcotDisplay;
+
+  db(
+      {this.depName,
+      this.docName,
+      this.starttime,
+      this.endtime,
+      this.dateChoosen,
+      this.name,
+      this.pcotDisplay,
+      this.error,
+      this.scheduler,
+      this.displayTime,
+      this.oldWaitingTime,
+      this.pcit1,
+      this.pcit2,
+      this.pcit3,
+      this.wt2,
+      this.wt3});
 
   Future Create() async {
     var databasesPath = await getDatabasesPath();
@@ -30,12 +50,32 @@ class db {
 
     await database.transaction((txn) async {
       int id1 = await txn.rawInsert(
-          'INSERT INTO dogs (name, depName, docName,starttime,endtime,dateChoosen ) VALUES(?,?,?,?,?,?)',
-          [name, depName, docName, starttime, endtime, dateChoosen]);
+          'INSERT INTO dogs (name, depName, docName, starttime, endtime, dateChoosen, pcit1, pcit2,pcit3,oldWaitingTime, displayTime, wt2, wt3, scheduler , error, pcotDisplay) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+          [
+            name,
+            depName,
+            docName,
+            starttime,
+            endtime,
+            dateChoosen,
+            pcit1,
+            pcit2,
+            pcit3,
+            oldWaitingTime,
+            displayTime,
+            wt2,
+            wt3,
+            scheduler,
+            error,
+            pcotDisplay
+          ]);
       print('inserted');
     });
 
     List<Map> list = await database.rawQuery('SELECT * FROM dogs');
     history = list;
+    print("***********************");
+    print("HISTORY");
+    print(history);
   }
 }
