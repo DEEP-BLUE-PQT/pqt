@@ -5,6 +5,7 @@ import 'package:flutter_app_pqt_splash/BottomNavigation/myappointment.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constants.dart';
+import 'appointmentHistory.dart';
 import 'navigation.dart';
 
 class Post extends StatefulWidget {
@@ -45,6 +46,7 @@ class _PostState extends State<Post> {
                   itemBuilder: (BuildContext context, i) {
                     return new ListTile(
                       title: Container(
+                        padding: EdgeInsets.all(15.0),
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(color: Colors.black12),
@@ -101,26 +103,12 @@ class _PostState extends State<Post> {
               Navigator.pushNamed(context, Myappointment.route);
             } else if (selectedIndex == 2) {
               Navigator.pushNamed(context, Post.route);
+            } else if (selectedIndex == 3) {
+              Navigator.pushNamed(context, AppointmentHistory.route);
             }
           });
         },
-        items: [
-          FFNavigationBarItem(
-            iconData: Icons.add,
-            label: 'Book Appointment',
-            selectedBackgroundColor: Color(0xFF3D00E0),
-          ),
-          FFNavigationBarItem(
-            iconData: Icons.list,
-            label: 'My Appointment',
-            selectedBackgroundColor: Color(0xFF3D00E0),
-          ),
-          FFNavigationBarItem(
-            iconData: Icons.add_a_photo_rounded,
-            label: 'Post',
-            selectedBackgroundColor: Color(0xFF3D00E0),
-          ),
-        ],
+        items: items,
       ),
     );
   }

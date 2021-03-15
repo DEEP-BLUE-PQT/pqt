@@ -18,7 +18,17 @@ class _MyDialog2State extends State<MyDialog2> {
       starttime: slotChoosen.split('-')[0],
       endtime: slotChoosen.split('-')[1],
       dateChoosen: dateChoosen,
-      name: nameOfPatient);
+      name: nameOfPatient,
+      pcotDisplay: pcotDisplay,
+      error: error,
+      scheduler: scheduler,
+      displayTime: displayTime,
+      oldWaitingTime: oldWaitingTime,
+      pcit1: pcit1,
+      pcit2: pcit2,
+      pcit3: pcit3,
+      wt2: wt2,
+      wt3: wt3);
   getDBDone() async {
     await DB.Create();
   }
