@@ -18,8 +18,21 @@ import 'appointmentHistory.dart';
 import 'dialog3.dart';
 import 'navigation.dart';
 
+// pcit1 = mapResponse["pcit1"];
+// print(pcit1);
+// pcit2 = mapResponse["pcit2"];
+// pcit3 = mapResponse["pcit3"];
+// oldWaitingTime = mapResponse["wt1"];
+// displayTime = oldWaitingTime;
+// wt2 = mapResponse["wt2"];
+// wt3 = mapResponse["wt3"];
+// scheduler = mapResponse["scheduler"];
+// error = mapResponse["error"];
+// pcotDisplay = mapResponse['pcot'];
+
 class Myappointment extends StatefulWidget {
   static String route = "Myappointment";
+
   @override
   _MyappointmentState createState() => _MyappointmentState();
 }

@@ -47,12 +47,15 @@ class _AppointmentHistoryState extends State<AppointmentHistory> {
                         children: [
                           ExpandableNotifier(
                             child: Padding(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(1),
                               child: Card(
                                 color: Colors.blue[100],
                                 clipBehavior: Clip.antiAlias,
                                 child: Column(
                                   children: <Widget>[
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
                                     ListTile(
                                       title: Text(
                                         history[index]["docName"],
@@ -65,129 +68,13 @@ class _AppointmentHistoryState extends State<AppointmentHistory> {
                                             "Doctor check in time " +
                                             history[index]["pcit1"],
                                       ),
-                                    ),
-                                    ScrollOnExpand(
-                                      scrollOnExpand: true,
-                                      scrollOnCollapse: false,
-                                      child: ExpandablePanel(
-                                        theme: const ExpandableThemeData(
-                                          headerAlignment:
-                                              ExpandablePanelHeaderAlignment
-                                                  .center,
-                                          tapBodyToCollapse: true,
-                                        ),
-                                        header: Container(
-                                            padding: EdgeInsets.all(10),
-                                            child: Text(
-                                              "WAITING TIME",
-                                              style: TextStyle(
-                                                  color: Color(0xFF3D00E0),
-                                                  fontSize: 15),
-                                            )),
-                                        /*collapsed: Text(
-                          loremIpsum,
-                          softWrap: true,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                    ),*/
-                                        expanded: Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              width: 2,
-                                              color: Color(0xFF3D00E0),
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                          child: Card(
-                                            color: Colors.deepPurpleAccent[50],
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                ListTile(
-                                                  title: Text(
-                                                      'Consultation Queue'),
-                                                  subtitle: Text(
-                                                      'check-in-time : ' +
-                                                          history[index]
-                                                              ["pcit1"]),
-                                                  trailing: Text(
-                                                    history[index]
-                                                                ["displayTime"]
-                                                            .toString() +
-                                                        "  " +
-                                                        "+/- " +
-                                                        history[index]
-                                                            ["error"] +
-                                                        ' ' +
-                                                        'mins',
-                                                  ),
-                                                ),
-                                                Divider(
-                                                  color: Color(0xFF3D00E0),
-                                                  thickness: 2,
-                                                ),
-                                                ListTile(
-                                                  title: Text('Billing Queue'),
-                                                  subtitle: Text(
-                                                      'check-in-time : ' +
-                                                          history[index]
-                                                              ["pcit2"]),
-                                                  trailing: Text(
-                                                    history[index]["wt2"]
-                                                            .toString() +
-                                                        "  " +
-                                                        "+/- " +
-                                                        "3" +
-                                                        ' ' +
-                                                        'mins',
-                                                  ),
-                                                ),
-                                                Divider(
-                                                  color: Color(0xFF3D00E0),
-                                                  thickness: 2,
-                                                ),
-                                                ListTile(
-                                                  title: Text('Medicine Queue'),
-                                                  subtitle: Text(
-                                                      'check-in-time : ' +
-                                                          history[index]
-                                                              ["pcit3"] +
-                                                          '\n' +
-                                                          '\n' +
-                                                          'check-out-time :' +
-                                                          history[index]
-                                                              ["pcotDisplay"]),
-                                                  trailing: Text(
-                                                    history[index]["wt3"]
-                                                            .toString() +
-                                                        "  " +
-                                                        "+/- " +
-                                                        "5" +
-                                                        ' ' +
-                                                        'mins',
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        builder: (_, collapsed, expanded) {
-                                          return Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 10,
-                                                right: 10,
-                                                bottom: 10),
-                                            child: Expandable(
-                                              collapsed: collapsed,
-                                              expanded: expanded,
-                                              theme: const ExpandableThemeData(
-                                                  crossFadePoint: 0),
-                                            ),
-                                          );
-                                        },
+                                      leading: Text(
+                                        history[index]["name"],
                                       ),
                                     ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    )
                                   ],
                                 ),
                               ),

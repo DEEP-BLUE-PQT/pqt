@@ -50,8 +50,9 @@ class APIservice {
     );
     if (response.statusCode == 200) {
       var mapResponse = json.decode(response.body);
-      print(mapResponse);
       doctorList = mapResponse["data"];
+      print("DOCTOR LIST");
+      print(doctorList);
     }
   }
 
